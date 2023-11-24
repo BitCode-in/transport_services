@@ -1,17 +1,38 @@
 #Новое
-import sys
+import sys, engine
 from docxtpl import DocxTemplate
 from PyQt5 import uic, QtGui
 from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog, QMessageBox
 from datetime import date
 
 
-class App(QMainWindow):
+class App(QMainWindow, engine.Ui_widget):
     def __init__(self):
         super().__init__()
+        self.setupUi(self)
         self.setWindowIcon(QtGui.QIcon('res/icon.png'))
-        uic.loadUi('Form.ui', self)
         self.pushButton.clicked.connect(self.word_create)
+        self.order_tab_sector()
+
+    def order_tab_sector(self):
+        self.tempwidget.setTabOrder(self.lineEdit, self.lineEdit_2)
+        self.tempwidget.setTabOrder(self.lineEdit_2, self.lineEdit_3)
+        self.tempwidget.setTabOrder(self.lineEdit_3, self.lineEdit_4)
+        self.tempwidget.setTabOrder(self.lineEdit_4, self.lineEdit_5)
+        self.tempwidget.setTabOrder(self.lineEdit_5, self.lineEdit_6)
+        self.tempwidget.setTabOrder(self.lineEdit_6, self.lineEdit_7)
+        self.tempwidget.setTabOrder(self.lineEdit_7, self.lineEdit_8)
+        self.tempwidget.setTabOrder(self.lineEdit_8, self.lineEdit_9)
+        self.tempwidget.setTabOrder(self.lineEdit_9, self.lineEdit_10)
+        self.tempwidget.setTabOrder(self.lineEdit_10, self.lineEdit_11)
+        self.tempwidget.setTabOrder(self.lineEdit_11, self.lineEdit_12)
+        self.tempwidget.setTabOrder(self.lineEdit_12, self.lineEdit_13)
+        self.tempwidget.setTabOrder(self.lineEdit_13, self.lineEdit_18)
+        self.tempwidget.setTabOrder(self.lineEdit_18, self.lineEdit_19)
+        self.tempwidget.setTabOrder(self.lineEdit_19, self.lineEdit_20)
+        self.tempwidget.setTabOrder(self.lineEdit_20, self.lineEdit_21)
+        self.tempwidget.setTabOrder(self.lineEdit_21, self.lineEdit_22)
+        self.tempwidget.setTabOrder(self.lineEdit_22, self.pushButton)
 
 # вставка в ворд
     def word_create(self):

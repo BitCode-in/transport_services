@@ -13,6 +13,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 class Ui_widget(object):
     def setupUi(self, widget):
+        self.tempwidget = widget
         widget.setObjectName("widget")
         widget.resize(707, 563)
         self.label = QtWidgets.QLabel(widget)
