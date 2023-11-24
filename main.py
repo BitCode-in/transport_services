@@ -1,3 +1,4 @@
+#Новое
 import sys
 from docxtpl import DocxTemplate
 from PyQt5 import uic, QtGui
