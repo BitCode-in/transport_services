@@ -133,7 +133,7 @@ class App(QMainWindow, engine.Ui_widget):
 
 		year = date.today()
 		doc = DocxTemplate("agreement.docx")
-		context = {'number': self.lineEdit.text(),
+		context = {'number': '№' + ' ' + self.lineEdit.text(),
 				   'city': self.lineEdit_2.text(),
 				   'year': full_year,
 				   'organization': self.lineEdit_3.text(),
