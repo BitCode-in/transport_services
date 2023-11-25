@@ -1,5 +1,5 @@
 #Новый комент
-import sys, engine
+import sys, engine, executor, customers, executor_add, customers_add
 from docxtpl import DocxTemplate
 from PyQt5 import QtCore, QtGui, QtWidgets, uic
 from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog, QMessageBox
@@ -31,19 +31,35 @@ class GenAuto(QtWidgets.QWidget):
 		self.lineEdit_1 = QtWidgets.QLineEdit(self)
 		self.lineEdit_1.setFont(font)
 		self.lineEdit_1.setObjectName("lineEdit_1")
+		self.lineEdit_1.setStyleSheet("QLineEdit{\n"
+"    border-radius: 5px;\n"
+"    border: 1px solid rgb(122, 122, 122);\n"
+"}")
 		self.horizontalLayout.addWidget(self.lineEdit_1)
 		self.lineEdit_2 = QtWidgets.QLineEdit(self)
 		self.lineEdit_2.setFont(font)
 		self.lineEdit_2.setObjectName("lineEdit_2")
+		self.lineEdit_2.setStyleSheet("QLineEdit{\n"
+"    border-radius: 5px;\n"
+"    border: 1px solid rgb(122, 122, 122);\n"
+"}")
 		self.horizontalLayout.addWidget(self.lineEdit_2)
 		self.lineEdit_3 = QtWidgets.QLineEdit(self)
 		self.lineEdit_3.setFont(font)
 		self.lineEdit_3.setObjectName("lineEdit_3")
+		self.lineEdit_3.setStyleSheet("QLineEdit{\n"
+"    border-radius: 5px;\n"
+"    border: 1px solid rgb(122, 122, 122);\n"
+"}")
 		self.horizontalLayout.addWidget(self.lineEdit_3)
 		self.lineEdit_4 = QtWidgets.QLineEdit(self)
 		self.lineEdit_4.setMinimumSize(QtCore.QSize(250, 0))
 		self.lineEdit_4.setFont(font)
 		self.lineEdit_4.setObjectName("lineEdit_4")
+		self.lineEdit_4.setStyleSheet("QLineEdit{\n"
+"    border-radius: 5px;\n"
+"    border: 1px solid rgb(122, 122, 122);\n"
+"}")
 		self.horizontalLayout.addWidget(self.lineEdit_4)
 		self.verticalLayout.addLayout(self.horizontalLayout)
 
@@ -54,6 +70,40 @@ class App(QMainWindow, engine.Ui_widget):
 		self.setting_init()
 		self.order_tab_sector()
 		self.generate_constraction()
+
+	def open_executor(self):
+		self.executor = QMainWindow()
+		self.executorui = executor.Ui_Form()
+		self.executorui.setupUi(self.executor)
+		self.executor.setWindowIcon(QtGui.QIcon('res/icon.png'))
+		self.executor.setWindowTitle('Исполнители')
+		self.executor.show()
+		self.executorui.pushButton_2.clicked.connect(self.open_executor_add)
+
+	def open_customers(self):
+		self.customers = QMainWindow()
+		self.customersui = customers.Ui_Form()
+		self.customersui.setupUi(self.customers)
+		self.customers.setWindowIcon(QtGui.QIcon('res/icon.png'))
+		self.customers.setWindowTitle('Заказчики')
+		self.customers.show()
+		self.customersui.pushButton_2.clicked.connect(self.open_customers_add)
+
+	def open_executor_add(self):
+		self.executor_add = QMainWindow()
+		self.executor_addui = executor_add.Ui_Form()
+		self.executor_addui.setupUi(self.executor_add)
+		self.executor_add.setWindowIcon(QtGui.QIcon('res/icon.png'))
+		self.executor_add.setWindowTitle('Добавить исполнителя')
+		self.executor_add.show()
+
+	def open_customers_add(self):
+		self.customers_add = QMainWindow()
+		self.customers_addui = customers_add.Ui_Form()
+		self.customers_addui.setupUi(self.customers_add)
+		self.customers_add.setWindowIcon(QtGui.QIcon('res/icon.png'))
+		self.customers_add.setWindowTitle('Добавить заказчика')
+		self.customers_add.show()
 
 	def add_auto(self):
 		temp_genauto = GenAuto(settext=str(len(self.list_auto)+1))
@@ -76,22 +126,25 @@ class App(QMainWindow, engine.Ui_widget):
 		self.pushButton.clicked.connect(self.word_create)
 		self.pushButton_2.clicked.connect(self.add_auto)
 		self.pushButton_3.clicked.connect(self.del_auto)
+		self.pushButton_4.clicked.connect(self.open_executor)
+		self.pushButton_5.clicked.connect(self.open_customers)
 		self.font = QtGui.QFont()
 		self.font.setFamily("Arial")
 
 		
 
 	def order_tab_sector(self):
-		self.tempwidget.setTabOrder(self.lineEdit, self.lineEdit_2)
-		self.tempwidget.setTabOrder(self.lineEdit_2, self.lineEdit_3)
-		self.tempwidget.setTabOrder(self.lineEdit_3, self.lineEdit_4)
-		self.tempwidget.setTabOrder(self.lineEdit_4, self.lineEdit_5)
-		self.tempwidget.setTabOrder(self.lineEdit_5, self.lineEdit_18)
-		self.tempwidget.setTabOrder(self.lineEdit_18, self.lineEdit_19)
-		self.tempwidget.setTabOrder(self.lineEdit_19, self.lineEdit_20)
-		self.tempwidget.setTabOrder(self.lineEdit_20, self.lineEdit_21)
-		self.tempwidget.setTabOrder(self.lineEdit_21, self.lineEdit_22)
-		self.tempwidget.setTabOrder(self.lineEdit_22, self.pushButton)
+		pass
+		# self.tempwidget.setTabOrder(self.lineEdit, self.lineEdit_2)
+		# self.tempwidget.setTabOrder(self.lineEdit_2, self.lineEdit_3)
+		# self.tempwidget.setTabOrder(self.lineEdit_3, self.lineEdit_4)
+		# self.tempwidget.setTabOrder(self.lineEdit_4, self.lineEdit_5)
+		# self.tempwidget.setTabOrder(self.lineEdit_5, self.lineEdit_18)
+		# self.tempwidget.setTabOrder(self.lineEdit_18, self.lineEdit_19)
+		# self.tempwidget.setTabOrder(self.lineEdit_19, self.lineEdit_20)
+		# self.tempwidget.setTabOrder(self.lineEdit_20, self.lineEdit_21)
+		# self.tempwidget.setTabOrder(self.lineEdit_21, self.lineEdit_22)
+		# self.tempwidget.setTabOrder(self.lineEdit_22, self.pushButton)
 
 # вставка в ворд
 	def word_create(self):
