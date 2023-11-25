@@ -130,3 +130,9 @@ class DB:
         self.conn.commit()
 
 
+    def test(self, id_auto):
+        self.c.execute(f"DELETE auto WHERE id_auto = {id_auto}")
+        self.conn.commit()
+
+
+
