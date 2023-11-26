@@ -1,4 +1,3 @@
-#Новый комент
 import sys
 import customers # таблица с заказчиками
 import executor_add # маленькие окна Исполнитель
@@ -217,6 +216,7 @@ class App(QMainWindow, engine.Ui_widget):
 			self.list_executor_widget[i[0]] = TablePrint(str(i[0]), str(i[1]), str(i[2]), str(i[3]))
 			self.executorui.verticalLayout_3.addWidget(self.list_executor_widget[i[0]])
 
+#Обновление
 	def open_customers(self):
 		self.customers = QMainWindow()
 		self.customersui = customers.Ui_Form()
