@@ -183,7 +183,7 @@ class TablePrint(QtWidgets.QWidget):
 		self.horizontalLayout.addWidget(self.label_10)
 
 class CustomPushBtn(QtWidgets.QPushButton):
-	def __init__(self, func):
+	def __init__(self, func, id_i):
 		super().__init__()
 		self.setObjectName(u"Выбрать")
 		self.setStyleSheet(u"QPushButton{\n"
@@ -192,7 +192,8 @@ class CustomPushBtn(QtWidgets.QPushButton):
 "	background: #26DE81;\n"
 "}")
 		self.setText("Выбрать")
+		self.id = id_i
 		font = QtGui.QFont()
 		font.setFamily("Montserrat")
 		self.setFont(font)
-		self.clicked.connect(func)
+		self.clicked.connect(lambda: func(self.id))
