@@ -134,7 +134,7 @@ class DB:
 		self.c.execute(f"""SELECT id_customer,organization,fio_customer,inn_customer 
 		FROM customer WHERE organization LIKE '%{name_search}%' 
 		or fio_customer LIKE '%{name_search}% or inn_customer LIKE '%{name_search}%'""")
-		self.conn.commit()
+		return self.c.fetchall()
 
 	# поиск исполнителя по айди
 	def search_customer_id(self, id_customer):
@@ -144,10 +144,16 @@ class DB:
 
 	# поиск заказчика
 	def search_executor(self, name_search):
-		self.c.execute(f"""SELECT organization,fio_executor,inn_executor
+		self.c.execute(f"""SELECT id_executor,organization,fio_executor,inn_executor
 		FROM executor WHERE organization LIKE '%{name_search}%' 
 		or fio_executor LIKE '%{name_search}% or inn_executor LIKE '%{name_search}%'""")
-		self.conn.commit()
+		return self.c.fetchall()
+
+	# поиск заказчика по айди
+	def search_executor_id(self, id_executor):
+		self.c.execute(f"""SELECT id_executor,organization,fio_executor,inn_executor 
+		FROM customer WHERE id_customer={id_executor}""")
+		return self.c.fetchall()
 
 	# вывод исполнителей
 	def view_customer(self):
