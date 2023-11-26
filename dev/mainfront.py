@@ -126,12 +126,11 @@ class App(QMainWindow, engine.Ui_widget):
 		for a, i in enumerate(self.db.view_executor()):
 			self.executorui.tableWidget.insertRow(a)
 			self.list_executor.append(i)
-			print(i)
 			self.executorui.tableWidget.setItem(a, 0, QtWidgets.QTableWidgetItem(str(a+1)))
 			self.executorui.tableWidget.setItem(a, 1, QtWidgets.QTableWidgetItem(str(i[1])))
 			self.executorui.tableWidget.setItem(a, 2, QtWidgets.QTableWidgetItem(str(i[2])))
 			self.executorui.tableWidget.setItem(a, 3, QtWidgets.QTableWidgetItem(str(i[3])))
-			self.executorui.tableWidget.setCellWidget(a, 4, CustomPushBtn(lambda: self.take_executor(int(i[0]))))
+			self.executorui.tableWidget.setCellWidget(a, 4, CustomPushBtn(self.take_executor, i[0]))
 
 	def search_executor(self):
 		self.list_executor = []
@@ -140,12 +139,11 @@ class App(QMainWindow, engine.Ui_widget):
 		for a, i in enumerate(self.db.search_executor(self.executorui.lineEdit.text())):
 			self.executorui.tableWidget.insertRow(a)
 			self.list_executor.append(i)
-			print(i)
 			self.executorui.tableWidget.setItem(a, 0, QtWidgets.QTableWidgetItem(str(a+1)))
 			self.executorui.tableWidget.setItem(a, 1, QtWidgets.QTableWidgetItem(str(i[1])))
 			self.executorui.tableWidget.setItem(a, 2, QtWidgets.QTableWidgetItem(str(i[2])))
 			self.executorui.tableWidget.setItem(a, 3, QtWidgets.QTableWidgetItem(str(i[4])))
-			self.executorui.tableWidget.setCellWidget(a, 4, CustomPushBtn(lambda: self.take_executor(int(i[0]))))
+			self.executorui.tableWidget.setCellWidget(a, 4, CustomPushBtn(self.take_executor, i[0]))
 
 	def open_customers(self):
 		self.list_customers = {}
