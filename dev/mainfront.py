@@ -38,8 +38,8 @@ class App(QMainWindow, engine.Ui_widget):
 		self.lineEdit_7.setReadOnly(True)
 		self.font = QtGui.QFont()
 		self.font.setFamily("Arial")
-		self.executor_now_id = None
-		self.customer_now_id = None
+		self.executor_now = None
+		self.customer_now = None
 		self.db = mainback.DB()
 
 	def open_executor(self):
@@ -71,9 +71,10 @@ class App(QMainWindow, engine.Ui_widget):
 
 	def take_executor(self, id):
 		executor_temp = self.db.search_executor_id(id)
-		self.executor_now_id = id
+		self.executor_now = executor_temp[0]
 		self.lineEdit_6.setText(f"{executor_temp[0][1]} | ИНН:{executor_temp[0][4]}")
 		self.executor.close()
+		print(self.executor_now)
 
 	def open_executor_add(self):
 		self.executor_add = QMainWindow()
