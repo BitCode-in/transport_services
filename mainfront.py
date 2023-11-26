@@ -203,14 +203,27 @@ class App(QMainWindow, engine.Ui_widget):
 
 	def open_executor(self):
 		self.list_executor = {}
-		self.list_executor_widget = {}
 		self.executor = QMainWindow()
 		self.executorui = executor.Ui_Form()
 		self.executorui.setupUi(self.executor)
 		self.executor.setWindowIcon(QtGui.QIcon('res/icon.png'))
 		self.executor.setWindowTitle('Исполнители')
 		self.executor.show()
-		self.executorui.pushButton_2.clicked.connect(self.open_executor_add)
+		self.executorui.pushButton.clicked.connect(self.open_executor_add)
+		self.executorui.tableWidget.setColumnWidth(0, 41)
+		self.executorui.tableWidget.setColumnWidth(1, 210)
+		self.executorui.tableWidget.setColumnWidth(2, 310)
+		self.executorui.tableWidget.setColumnWidth(3, 110)
+		self.update_table_executor()
+		self.executorui.pushButton_3.clicked.connect(self.del_executor)
+		self.executorui.pushButton_2.clicked.connect(self.open_executor_update)
+		self.executorui.pushButton_4.clicked.connect(self.search_executor)
+
+	def del_executor(self):
+		num = self.executorui.tableWidget.currentRow()
+		id = self.list_executor[num][0]
+		self.db.delete_executor(int(id))
+		self.update_table_executor()
 
 #Обновление
 	def open_customers(self):
@@ -224,6 +237,7 @@ class App(QMainWindow, engine.Ui_widget):
 		self.customers.show()
 		self.customersui.pushButton_2.clicked.connect(self.open_customers_add)
 
+
 	def open_executor_add(self):
 		self.executor_add = QMainWindow()
 		self.executor_addui = executor_add.Ui_Form()
@@ -231,6 +245,67 @@ class App(QMainWindow, engine.Ui_widget):
 		self.executor_add.setWindowIcon(QtGui.QIcon('res/icon.png'))
 		self.executor_add.setWindowTitle('Добавить исполнителя')
 		self.executor_add.show()
+		self.executor_addui.pushButton.clicked.connect(lambda: (self.db.insert_executor(self.executor_addui.lineEdit.text(),
+																			   self.executor_addui.lineEdit_2.text(),
+																			   self.executor_addui.lineEdit_3.text(),
+																			   self.executor_addui.lineEdit_4.text(),
+																			   self.executor_addui.lineEdit_5.text(),
+																			   self.executor_addui.lineEdit_6.text()),
+																self.update_table_executor(),self.executor_add.close())
+													   )
+
+	def open_executor_update(self):
+		self.executor_add = QMainWindow()
+		self.executor_addui = executor_add.Ui_Form()
+		self.executor_addui.setupUi(self.executor_add)
+		self.executor_add.setWindowIcon(QtGui.QIcon('res/icon.png'))
+		self.executor_add.setWindowTitle('Изменить исполнителя')
+		num = self.executorui.tableWidget.currentRow()
+		id = self.list_executor[num][0]
+		executor_temp = self.db.search_executor_id(id)
+		self.executor_addui.lineEdit.setText(str(executor_temp[0][1]))
+		self.executor_addui.lineEdit_2.setText(str(executor_temp[0][2]))
+		self.executor_addui.lineEdit_3.setText(str(executor_temp[0][3]))
+		self.executor_addui.lineEdit_4.setText(str(executor_temp[0][4]))
+		self.executor_addui.lineEdit_5.setText(str(executor_temp[0][5]))
+		self.executor_addui.lineEdit_6.setText(str(executor_temp[0][6]))
+		self.executor_add.show()
+		self.executor_addui.pushButton.clicked.connect(lambda: (self.db.update_executor(id,
+																			   self.executor_addui.lineEdit.text(),
+																			   self.executor_addui.lineEdit_2.text(),
+																			   self.executor_addui.lineEdit_3.text(),
+																			   self.executor_addui.lineEdit_4.text(),
+																			   self.executor_addui.lineEdit_5.text(),
+																			   self.executor_addui.lineEdit_6.text()),
+																self.update_table_executor(),
+																self.executor_add.close()))
+	def update_table_executor(self):
+		self.list_executor = []
+		self.executorui.tableWidget.clearContents()
+		self.executorui.tableWidget.setRowCount(0)
+		for a, i in enumerate(self.db.view_executor()):
+			self.executorui.tableWidget.insertRow(a)
+			self.list_executor.append(i)
+			print(i)
+			self.executorui.tableWidget.setItem(a, 0, QtWidgets.QTableWidgetItem(str(i[0])))
+			self.executorui.tableWidget.setItem(a, 1, QtWidgets.QTableWidgetItem(str(i[1])))
+			self.executorui.tableWidget.setItem(a, 2, QtWidgets.QTableWidgetItem(str(i[2])))
+			self.executorui.tableWidget.setItem(a, 3, QtWidgets.QTableWidgetItem(str(i[3])))
+
+	def search_executor(self):
+
+		self.list_executor = []
+		self.executorui.tableWidget.clearContents()
+		self.executorui.tableWidget.setRowCount(0)
+		for a, i in enumerate(self.db.search_executor(self.executorui.lineEdit.text())):
+			self.executorui.tableWidget.insertRow(a)
+			self.list_executor.append(i)
+			print(i)
+			self.executorui.tableWidget.setItem(a, 0, QtWidgets.QTableWidgetItem(str(i[0])))
+			self.executorui.tableWidget.setItem(a, 1, QtWidgets.QTableWidgetItem(str(i[1])))
+			self.executorui.tableWidget.setItem(a, 2, QtWidgets.QTableWidgetItem(str(i[2])))
+			self.executorui.tableWidget.setItem(a, 3, QtWidgets.QTableWidgetItem(str(i[4])))
+
 
 	def open_customers_add(self):
 		self.customers_add = QMainWindow()
@@ -244,6 +319,8 @@ class App(QMainWindow, engine.Ui_widget):
 		temp_genauto = GenAuto(settext=str(len(self.list_auto)+1))
 		self.list_auto.append(temp_genauto)
 		self.verticalLayout_3.addWidget(temp_genauto)
+		for i in self.list_auto:
+			print(i.lineEdit_1.text())
 
 	def del_auto(self):
 		if len(self.list_auto) > 1:

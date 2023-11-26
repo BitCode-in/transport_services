@@ -73,12 +73,9 @@ class DB:
 		self.conn.commit()
 
 	# добавление заказчика
-	def insert_executor(self, organization, fio_executor, address_executor, inn_executor,
-						rc_executor, bik_executor):
-		self.c.execute(f"""INSERT INTO executor (organization, fio_executor, address_executor, inn_executor,
-						rc_executor, bik_executor)
-						  VALUES ({organization}, {fio_executor}, {address_executor}, {inn_executor}, {rc_executor},
-						  {bik_executor})""")
+	def insert_executor(self, organization, fio_executor, address_executor, inn_executor, rc_executor, bik_executor):
+		self.c.execute("""INSERT INTO executor (organization, fio_executor, address_executor, inn_executor, rc_executor, bik_executor)
+						  VALUES (?, ?, ?, ?, ?, ?)""",(organization, fio_executor, address_executor, inn_executor, rc_executor, bik_executor))
 		self.conn.commit()
 
 	# добавление авто
@@ -101,7 +98,7 @@ class DB:
 	def update_executor(self, id_executor, organization, fio_executor, address_executor, inn_executor,
 						rc_executor, bik_executor):
 		self.c.execute(f"""UPDATE executor 
-						SET organization={organization}, fio_executor={fio_executor}, address_executor={address_executor},
+						SET organization='{organization}', fio_executor='{fio_executor}', address_executor='{address_executor}',
 						inn_executor={inn_executor}, rc_executor={rc_executor}, bik_executor={bik_executor}
 						WHERE id_executor={id_executor}""")
 		self.conn.commit()
@@ -116,17 +113,17 @@ class DB:
 
 	# удалить исполнителя
 	def delete_customer(self, id_customer):
-		self.c.execute(f"DELETE customer WHERE id_customer = {id_customer}")
+		self.c.execute(f"DELETE FROM customer WHERE id_customer = {id_customer}")
 		self.conn.commit()
 
 	# удалить заказчика
 	def delete_executor(self, id_executor):
-		self.c.execute(f"DELETE executor WHERE id_executor = {id_executor}")
+		self.c.execute(f"DELETE FROM executor WHERE id_executor = {id_executor}")
 		self.conn.commit()
 
 	# удалить авто
 	def delete_auto(self, id_auto):
-		self.c.execute(f"DELETE auto WHERE id_auto = {id_auto}")
+		self.c.execute(f"DELETE FROM auto WHERE id_auto = {id_auto}")
 		self.conn.commit()
 
 	# поиск исполнителя
@@ -144,15 +141,14 @@ class DB:
 
 	# поиск заказчика
 	def search_executor(self, name_search):
-		self.c.execute(f"""SELECT id_executor,organization,fio_executor,inn_executor
+		self.c.execute(f"""SELECT *
 		FROM executor WHERE organization LIKE '%{name_search}%' 
-		or fio_executor LIKE '%{name_search}% or inn_executor LIKE '%{name_search}%'""")
+		or fio_executor LIKE '%{name_search}%' or inn_executor LIKE '%{name_search}%'""")
 		return self.c.fetchall()
 
 	# поиск заказчика по айди
 	def search_executor_id(self, id_executor):
-		self.c.execute(f"""SELECT id_executor,organization,fio_executor,inn_executor 
-		FROM customer WHERE id_customer={id_executor}""")
+		self.c.execute(f"""SELECT * FROM executor WHERE id_executor={id_executor}""")
 		return self.c.fetchall()
 
 	# вывод исполнителей
