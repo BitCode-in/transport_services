@@ -1,4 +1,3 @@
-#Новый комент
 import sys
 import customers # таблица с заказчиками
 import executor_add # маленькие окна Исполнитель
@@ -213,6 +212,7 @@ class App(QMainWindow, engine.Ui_widget):
 		self.executor.show()
 		self.executorui.pushButton_2.clicked.connect(self.open_executor_add)
 
+#Обновление
 	def open_customers(self):
 		self.list_customers = {}
 		self.list_customers_widget = {}
