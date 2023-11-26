@@ -218,6 +218,8 @@ class App(QMainWindow, engine.Ui_widget):
 
 #Обновление
 	def open_customers(self):
+		self.list_customers = {}
+		self.list_customers_widget = {}
 		self.customers = QMainWindow()
 		self.customersui = customers.Ui_Form()
 		self.customersui.setupUi(self.customers)
