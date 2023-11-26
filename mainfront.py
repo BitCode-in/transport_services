@@ -212,10 +212,6 @@ class App(QMainWindow, engine.Ui_widget):
 		self.executor.setWindowTitle('Исполнители')
 		self.executor.show()
 		self.executorui.pushButton_2.clicked.connect(self.open_executor_add)
-		for i in self.db.view_executor():
-			self.list_executor[i[0]] = i
-			self.list_executor_widget[i[0]] = TablePrint(str(i[0]), str(i[1]), str(i[2]), str(i[3]))
-			self.executorui.verticalLayout_3.addWidget(self.list_executor_widget[i[0]])
 
 	def open_customers(self):
 		self.list_customers = {}
