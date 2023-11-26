@@ -131,10 +131,16 @@ class DB:
 
 	# поиск исполнителя
 	def search_customer(self, name_search):
-		self.c.execute(f"""SELECT organization,fio_customer,inn_customer 
+		self.c.execute(f"""SELECT id_customer,organization,fio_customer,inn_customer 
 		FROM customer WHERE organization LIKE '%{name_search}%' 
 		or fio_customer LIKE '%{name_search}% or inn_customer LIKE '%{name_search}%'""")
 		self.conn.commit()
+
+	# поиск исполнителя по айди
+	def search_customer_id(self, id_customer):
+		self.c.execute(f"""SELECT id_customer,organization,fio_customer,inn_customer 
+		FROM customer WHERE id_customer={id_customer}""")
+		return self.c.fetchall()
 
 	# поиск заказчика
 	def search_executor(self, name_search):
