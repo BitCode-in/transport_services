@@ -1,7 +1,13 @@
 #Новый комент
-import sys, engine, executor, customers, executor_add, customers_add
+import sys
+import customers # таблица с заказчиками
+import executor_add # маленькие окна Исполнитель
+import customers_add # маленькие окна Зазазчик
+import executor # таблица с исполнителями
+import engine # основное окно
+
 from docxtpl import DocxTemplate
-from PyQt5 import QtCore, QtGui, QtWidgets, uic
+from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog, QMessageBox
 from datetime import date
 
@@ -63,6 +69,104 @@ class GenAuto(QtWidgets.QWidget):
 		self.horizontalLayout.addWidget(self.lineEdit_4)
 		self.verticalLayout.addLayout(self.horizontalLayout)
 
+class TablePrint(QtWidgets.QHBoxLayout):
+	def __int__(self):
+		super().__int__()
+		self.setSpacing(0)
+		self.setObjectName("horizontalLayout")
+		self.label_2 = QtWidgets.QLabel(self)
+		self.label_2.setMinimumSize(QtCore.QSize(20, 0))
+		self.label_2.setMaximumSize(QtCore.QSize(20, 16777215))
+		font = QtGui.QFont()
+		font.setFamily("Montserrat")
+		self.label_2.setFont(font)
+		self.label_2.setStyleSheet("border-color: none rgb(122, 122, 122) none none;")
+		self.label_2.setObjectName("label_2")
+		self.addWidget(self.label_2)
+		self.label_3 = QtWidgets.QLabel(self)
+		self.label_3.setMinimumSize(QtCore.QSize(150, 0))
+		self.label_3.setMaximumSize(QtCore.QSize(150, 16777215))
+		self.label_3.setFont(font)
+		self.label_3.setStyleSheet("border-color: none rgb(122, 122, 122) none none;")
+		self.label_3.setObjectName("label_3")
+		self.addWidget(self.label_3)
+		self.label_4 = QtWidgets.QLabel(self)
+		self.label_4.setMinimumSize(QtCore.QSize(200, 0))
+		self.label_4.setMaximumSize(QtCore.QSize(200, 16777215))
+		self.label_4.setFont(font)
+		self.label_4.setStyleSheet("border-color: none rgb(122, 122, 122) none none;")
+		self.label_4.setObjectName("label_4")
+		self.addWidget(self.label_4)
+		self.label_7 = QtWidgets.QLabel(self)
+		self.label_7.setMinimumSize(QtCore.QSize(130, 0))
+		self.label_7.setMaximumSize(QtCore.QSize(130, 16777215))
+		self.label_7.setFont(font)
+		self.label_7.setStyleSheet("border-color: none rgb(122, 122, 122) none none;")
+		self.label_7.setObjectName("label_7")
+		self.addWidget(self.label_7)
+		self.label_9 = QtWidgets.QLabel(self)
+		self.label_9.setMinimumSize(QtCore.QSize(0, 21))
+		self.label_9.setMaximumSize(QtCore.QSize(16777215, 18))
+		self.label_9.setStyleSheet("border-color: none;")
+		self.label_9.setText("")
+		self.label_9.setObjectName("label_9")
+		self.addWidget(self.label_9)
+		self.pushButton_9 = QtWidgets.QPushButton(self)
+		self.pushButton_9.setMinimumSize(QtCore.QSize(55, 18))
+		self.pushButton_9.setMaximumSize(QtCore.QSize(16777215, 18))
+		font.setPointSize(7)
+		self.pushButton_9.setFont(font)
+		self.pushButton_9.setStyleSheet("QPushButton {\n"
+										"    background: rgb(0, 255, 127);\n"
+										"    border: 1px solid rgb(122, 122, 122);\n"
+										"    border-radius: 5px;  /* Установите радиус закругления, например, 10px */\n"
+										"}")
+		self.pushButton_9.setObjectName("pushButton_9")
+		self.addWidget(self.pushButton_9)
+		self.label_18 = QtWidgets.QLabel(self)
+		self.label_18.setMinimumSize(QtCore.QSize(0, 0))
+		self.label_18.setMaximumSize(QtCore.QSize(16777215, 16777215))
+		self.label_18.setStyleSheet("border-color: none;")
+		self.label_18.setText("")
+		self.label_18.setObjectName("label_18")
+		self.addWidget(self.label_18)
+		self.pushButton_5 = QtWidgets.QPushButton(self)
+		self.pushButton_5.setMinimumSize(QtCore.QSize(55, 18))
+		self.pushButton_5.setMaximumSize(QtCore.QSize(16777215, 18))
+		font.setPointSize(7)
+		self.pushButton_5.setFont(font)
+		self.pushButton_5.setStyleSheet("QPushButton {\n"
+										"    background: #FFB200;\n"
+										"    border: 1px solid rgb(122, 122, 122);\n"
+										"    border-radius: 5px;  /* Установите радиус закругления, например, 10px */\n"
+										"}")
+		self.pushButton_5.setObjectName("pushButton_5")
+		self.addWidget(self.pushButton_5)
+		self.label_5 = QtWidgets.QLabel(self)
+		self.label_5.setMinimumSize(QtCore.QSize(0, 20))
+		self.label_5.setMaximumSize(QtCore.QSize(16777215, 20))
+		self.label_5.setStyleSheet("border-color: none;")
+		self.label_5.setText("")
+		self.label_5.setObjectName("label_5")
+		self.addWidget(self.label_5)
+		self.pushButton_6 = QtWidgets.QPushButton(self)
+		self.pushButton_6.setMinimumSize(QtCore.QSize(18, 18))
+		self.pushButton_6.setMaximumSize(QtCore.QSize(18, 18))
+		self.pushButton_6.setFont(font)
+		self.pushButton_6.setStyleSheet("QPushButton {\n"
+										"    background: rgb(255, 119, 121);\n"
+										"    border: 1px solid rgb(122, 122, 122);\n"
+										"    border-radius: 5px;  /* Установите радиус закругления, например, 10px */\n"
+										"}")
+		self.pushButton_6.setObjectName("pushButton_6")
+		self.addWidget(self.pushButton_6)
+		self.label_10 = QtWidgets.QLabel(self)
+		self.label_10.setStyleSheet("border-color: none;")
+		self.label_10.setText("")
+		self.label_10.setObjectName("label_10")
+		self.addWidget(self.label_10)
+		self.addLayout(self)
+
 class App(QMainWindow, engine.Ui_widget):
 	def __init__(self):
 		super().__init__()
@@ -79,6 +183,12 @@ class App(QMainWindow, engine.Ui_widget):
 		self.executor.setWindowTitle('Исполнители')
 		self.executor.show()
 		self.executorui.pushButton_2.clicked.connect(self.open_executor_add)
+
+		table_print = TablePrint()
+		self.executorui.verticalLayout_4.addWidget(table_print)
+
+
+
 
 	def open_customers(self):
 		self.customers = QMainWindow()
@@ -238,7 +348,6 @@ class App(QMainWindow, engine.Ui_widget):
 		self.lineEdit_20.clear()
 		self.lineEdit_21.clear()
 		self.lineEdit_22.clear()
-
 
 
 

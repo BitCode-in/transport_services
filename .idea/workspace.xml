@@ -5,8 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4a75d23d-5725-4bdb-b6e2-ea1103e38b8d" name="Changes" comment="test123">
-      <change beforePath="$PROJECT_DIR$/mainback.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainback.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/customers.py" beforeDir="false" afterPath="$PROJECT_DIR$/customers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/customers_add.py" beforeDir="false" afterPath="$PROJECT_DIR$/customers_add.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/customers_add.ui" beforeDir="false" afterPath="$PROJECT_DIR$/customers_add.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/engine.py" beforeDir="false" afterPath="$PROJECT_DIR$/engine.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/executor.py" beforeDir="false" afterPath="$PROJECT_DIR$/executor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/executor.ui" beforeDir="false" afterPath="$PROJECT_DIR$/executor.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/executor_add.py" beforeDir="false" afterPath="$PROJECT_DIR$/executor_add.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/executor_add.ui" beforeDir="false" afterPath="$PROJECT_DIR$/executor_add.ui" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mainfront.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainfront.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/сustomers.ui" beforeDir="false" afterPath="$PROJECT_DIR$/сustomers.ui" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,12 +45,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "settings.editor.selected.configurable": "terminal"
   }
-}</component>
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/UI" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="mainfront" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="transport_services" />
