@@ -613,6 +613,11 @@
           <height>0</height>
          </size>
         </property>
+        <property name="font">
+         <font>
+          <family>Montserrat</family>
+         </font>
+        </property>
         <property name="styleSheet">
          <string notr="true">QLineEdit{
 	border-radius: 5px;
@@ -713,6 +718,11 @@
           <width>200</width>
           <height>0</height>
          </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>Montserrat</family>
+         </font>
         </property>
         <property name="styleSheet">
          <string notr="true">QLineEdit{

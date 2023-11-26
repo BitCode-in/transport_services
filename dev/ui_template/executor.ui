@@ -28,24 +28,57 @@
      <height>521</height>
     </size>
    </property>
+   <property name="font">
+    <font>
+     <family>Montserrat</family>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
    <column>
     <property name="text">
      <string>№</string>
+    </property>
+    <property name="font">
+     <font>
+      <family>Montserrat</family>
+     </font>
     </property>
    </column>
    <column>
     <property name="text">
      <string>Организация</string>
     </property>
+    <property name="font">
+     <font>
+      <family>Montserrat</family>
+     </font>
+    </property>
    </column>
    <column>
     <property name="text">
      <string>ФИО</string>
     </property>
+    <property name="font">
+     <font>
+      <family>Montserrat</family>
+     </font>
+    </property>
    </column>
    <column>
     <property name="text">
      <string>ИНН</string>
+    </property>
+    <property name="font">
+     <font>
+      <family>Montserrat</family>
+     </font>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string/>
     </property>
    </column>
   </widget>
@@ -57,6 +90,11 @@
      <width>671</width>
      <height>51</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Montserrat</family>
+    </font>
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout">
     <property name="spacing">
@@ -88,9 +126,15 @@
         <height>30</height>
        </size>
       </property>
+      <property name="font">
+       <font>
+        <family>Montserrat</family>
+       </font>
+      </property>
       <property name="styleSheet">
        <string notr="true">QPushButton {
 	background:none;
+	border: 0px solid none;
 }</string>
       </property>
       <property name="text">
@@ -98,7 +142,7 @@
       </property>
       <property name="icon">
        <iconset>
-        <normaloff>../../../Downloads/free-icon-search-8371297.png</normaloff>../../../Downloads/free-icon-search-8371297.png</iconset>
+        <normaloff>../res/free-icon-search-8371297.png</normaloff>../res/free-icon-search-8371297.png</iconset>
       </property>
       <property name="iconSize">
        <size>
@@ -116,6 +160,17 @@
         <height>30</height>
        </size>
       </property>
+      <property name="font">
+       <font>
+        <family>Montserrat</family>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QLineEdit{
+	border-radius: 5px;
+	border: 1px solid rgb(122, 122, 122);
+}</string>
+      </property>
      </widget>
     </item>
     <item>
@@ -132,9 +187,15 @@
         <height>30</height>
        </size>
       </property>
+      <property name="font">
+       <font>
+        <family>Montserrat</family>
+       </font>
+      </property>
       <property name="styleSheet">
        <string notr="true">QPushButton {
 	background:none;
+	border: 0px solid none;
 }</string>
       </property>
       <property name="text">
@@ -142,7 +203,7 @@
       </property>
       <property name="icon">
        <iconset>
-        <normaloff>../../../Downloads/free-icon-hospital-signal-8371351.png</normaloff>../../../Downloads/free-icon-hospital-signal-8371351.png</iconset>
+        <normaloff>../res/free-icon-hospital-signal-8371351.png</normaloff>../res/free-icon-hospital-signal-8371351.png</iconset>
       </property>
       <property name="iconSize">
        <size>
@@ -166,9 +227,15 @@
         <height>30</height>
        </size>
       </property>
+      <property name="font">
+       <font>
+        <family>Montserrat</family>
+       </font>
+      </property>
       <property name="styleSheet">
        <string notr="true">QPushButton {
 	background:none;
+	border: 0px solid none;
 }</string>
       </property>
       <property name="text">
@@ -176,7 +243,7 @@
       </property>
       <property name="icon">
        <iconset>
-        <normaloff>../../../Downloads/free-icon-avatar-8370797.png</normaloff>../../../Downloads/free-icon-avatar-8370797.png</iconset>
+        <normaloff>../res/free-icon-avatar-8370797.png</normaloff>../res/free-icon-avatar-8370797.png</iconset>
       </property>
       <property name="iconSize">
        <size>
@@ -200,9 +267,15 @@
         <height>30</height>
        </size>
       </property>
+      <property name="font">
+       <font>
+        <family>Montserrat</family>
+       </font>
+      </property>
       <property name="styleSheet">
        <string notr="true">QPushButton {
 	background:none;
+	border: 0px solid none;
 }</string>
       </property>
       <property name="text">
@@ -210,7 +283,7 @@
       </property>
       <property name="icon">
        <iconset>
-        <normaloff>../../../Downloads/free-icon-add-button-8371340.png</normaloff>../../../Downloads/free-icon-add-button-8371340.png</iconset>
+        <normaloff>../res/free-icon-add-button-8371340.png</normaloff>../res/free-icon-add-button-8371340.png</iconset>
       </property>
       <property name="iconSize">
        <size>
