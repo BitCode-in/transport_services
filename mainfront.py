@@ -216,6 +216,7 @@ class App(QMainWindow, engine.Ui_widget):
 			self.list_executor[i[0]] = i
 			self.list_executor_widget[i[0]] = TablePrint(str(i[0]), str(i[1]), str(i[2]), str(i[3]))
 			self.executorui.verticalLayout_3.addWidget(self.list_executor_widget[i[0]])
+			
 
 	def open_customers(self):
 		self.customers = QMainWindow()
