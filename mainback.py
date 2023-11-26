@@ -129,6 +129,24 @@ class DB:
         self.c.execute(f"DELETE auto WHERE id_auto = {id_auto}")
         self.conn.commit()
 
+    # поиск исполнителя
+    def search_customer(self, name_searh):
+        self.c.execute(f"""SELECT organization,fio_customer,inn_customer 
+        FROM customer WHERE organization LIKE '%{name_searh}%' 
+        or fio_customer LIKE '%{name_searh}% or inn_customer LIKE '%{name_searh}%''""")
+        self.conn.commit()
+
+    # поиск заказчика
+    def search_executor(self, name_searh):
+        self.c.execute(f"""SELECT organization,fio_executor,inn_executor
+        FROM executor WHERE organization LIKE '%{name_searh}%' 
+        or fio_executor LIKE '%{name_searh}% or inn_executor LIKE '%{name_searh}%''""")
+        self.conn.commit()
+
+
+
+
+
 
 
 
