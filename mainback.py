@@ -145,17 +145,20 @@ class DB:
 
 	# вывод исполнителей
 	def view_customer(self):
-		return self.c.execute(f"SELECT id_customer,organization,fio_customer,inn_customer FROM customer")
+		self.c.execute(f"SELECT id_customer,organization,fio_customer,inn_customer FROM customer")
+		return self.c.fetchall()
 		#self.conn.commit()
 
 	# вывод заказчиков
 	def view_executor(self):
-		return self.c.execute(f"SELECT id_executor,organization,fio_executor,inn_executor FROM executor")
+		self.c.execute(f"SELECT id_executor,organization,fio_executor,inn_executor FROM executor")
+		return self.c.fetchall()
 		#self.conn.commit()
 
 	# вывод авто
 	def view_auto(self):
-		return self.c.execute(f"SELECT id_auto,brand_auto,num_tractor,num_trailer,fio_driver FROM auto")
+		self.c.execute(f"SELECT id_auto,brand_auto,num_tractor,num_trailer,fio_driver FROM auto")
+		return self.c.fetchall()
 		#self.conn.commit()
 
 

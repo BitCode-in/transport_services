@@ -82,12 +82,6 @@ class TablePrint(QtWidgets.QWidget):
 		self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
 		self.horizontalLayout.setSpacing(0)
 		self.horizontalLayout.setObjectName("horizontalLayout")
-
-class TablePrint(QtWidgets.QHBoxLayout):
-	def __init__(self):
-		super().__init__()
-		self.setSpacing(0)
-		self.setObjectName("horizontalLayout")
 		self.label_2 = QtWidgets.QLabel(self)
 		self.label_2.setMinimumSize(QtCore.QSize(20, 0))
 		self.label_2.setMaximumSize(QtCore.QSize(20, 16777215))
@@ -207,9 +201,10 @@ class App(QMainWindow, engine.Ui_widget):
 		self.order_tab_sector()
 		self.generate_constraction()
 		self.db = mainback.DB()
-		print(self.db.view_executor())
 
 	def open_executor(self):
+		self.list_executor = {}
+		self.list_executor_widget = {}
 		self.executor = QMainWindow()
 		self.executorui = executor.Ui_Form()
 		self.executorui.setupUi(self.executor)
@@ -217,8 +212,10 @@ class App(QMainWindow, engine.Ui_widget):
 		self.executor.setWindowTitle('Исполнители')
 		self.executor.show()
 		self.executorui.pushButton_2.clicked.connect(self.open_executor_add)
-		table_print = TablePrint('1', 'ООО А2М', "Иванов", "231238")
-		self.executorui.verticalLayout_3.addWidget(table_print)
+		for i in self.db.view_executor():
+			self.list_executor[i[0]] = i
+			self.list_executor_widget[i[0]] = TablePrint(str(i[0]), str(i[1]), str(i[2]), str(i[3]))
+			self.executorui.verticalLayout_3.addWidget(self.list_executor_widget[i[0]])
 
 	def open_customers(self):
 		self.customers = QMainWindow()

@@ -140,17 +140,10 @@ class Ui_Form(object):
         self.horizontalLayout_5.addWidget(self.pushButton_4)
         self.verticalLayout_2.addLayout(self.horizontalLayout_5)
         self.verticalLayout.addWidget(self.widget_2)
-        self.verticalWidget = QtWidgets.QWidget(self.scrollAreaWidgetContents_2)
-        self.verticalWidget.setStyleSheet("QWidget{\n"
-"    border: 1px solid rgb(122, 122, 122);\n"
-"    border-color: none rgb(122, 122, 122) rgb(122, 122, 122) rgb(122, 122, 122);\n"
-"}")
-        self.verticalWidget.setObjectName("verticalWidget")
-        self.verticalLayout_4 = QtWidgets.QVBoxLayout(self.verticalWidget)
-        self.verticalLayout_4.setContentsMargins(0, 0, 0, 0)
-        self.verticalLayout_4.setSpacing(0)
-        self.verticalLayout_4.setObjectName("verticalLayout_4")
-        self.verticalLayout.addWidget(self.verticalWidget)
+        self.verticalLayout_3 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_3.setSpacing(0)
+        self.verticalLayout_3.setObjectName("verticalLayout_3")
+        self.verticalLayout.addLayout(self.verticalLayout_3)
         spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.verticalLayout.addItem(spacerItem)
         self.scrollArea.setWidget(self.scrollAreaWidgetContents_2)
