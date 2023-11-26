@@ -70,7 +70,6 @@ class GenAuto(QtWidgets.QWidget):
 		self.horizontalLayout.addWidget(self.lineEdit_4)
 		self.verticalLayout.addLayout(self.horizontalLayout)
 
-<<<<<<< HEAD
 class TablePrint(QtWidgets.QWidget):
 	def __init__(self, strlb_1, strlb_2, strlb_3, strlb_4):
 		super().__init__()
@@ -83,13 +82,12 @@ class TablePrint(QtWidgets.QWidget):
 		self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
 		self.horizontalLayout.setSpacing(0)
 		self.horizontalLayout.setObjectName("horizontalLayout")
-=======
+
 class TablePrint(QtWidgets.QHBoxLayout):
 	def __init__(self):
 		super().__init__()
 		self.setSpacing(0)
 		self.setObjectName("horizontalLayout")
->>>>>>> origin
 		self.label_2 = QtWidgets.QLabel(self)
 		self.label_2.setMinimumSize(QtCore.QSize(20, 0))
 		self.label_2.setMaximumSize(QtCore.QSize(20, 16777215))
@@ -209,6 +207,7 @@ class App(QMainWindow, engine.Ui_widget):
 		self.order_tab_sector()
 		self.generate_constraction()
 		self.db = mainback.DB()
+		print(self.db.view_executor())
 
 	def open_executor(self):
 		self.executor = QMainWindow()
