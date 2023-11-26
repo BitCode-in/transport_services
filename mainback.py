@@ -130,17 +130,17 @@ class DB:
         self.conn.commit()
 
     # поиск исполнителя
-    def search_customer(self, name_searh):
+    def search_customer(self, name_search):
         self.c.execute(f"""SELECT organization,fio_customer,inn_customer 
-        FROM customer WHERE organization LIKE '%{name_searh}%' 
-        or fio_customer LIKE '%{name_searh}% or inn_customer LIKE '%{name_searh}%''""")
+        FROM customer WHERE organization LIKE '%{name_search}%' 
+        or fio_customer LIKE '%{name_search}% or inn_customer LIKE '%{name_search}%'""")
         self.conn.commit()
 
     # поиск заказчика
-    def search_executor(self, name_searh):
+    def search_executor(self, name_search):
         self.c.execute(f"""SELECT organization,fio_executor,inn_executor
-        FROM executor WHERE organization LIKE '%{name_searh}%' 
-        or fio_executor LIKE '%{name_searh}% or inn_executor LIKE '%{name_searh}%''""")
+        FROM executor WHERE organization LIKE '%{name_search}%' 
+        or fio_executor LIKE '%{name_search}% or inn_executor LIKE '%{name_search}%'""")
         self.conn.commit()
 
 
