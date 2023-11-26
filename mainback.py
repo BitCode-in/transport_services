@@ -143,7 +143,20 @@ class DB:
         or fio_executor LIKE '%{name_search}% or inn_executor LIKE '%{name_search}%'""")
         self.conn.commit()
 
+    # вывод исполнителей
+    def view_customer(self):
+        self.c.execute(f"SELECT id_customer,organization,fio_customer,inn_customer FROM customer")
+        self.conn.commit()
 
+    # вывод заказчиков
+    def view_executor(self):
+        self.c.execute(f"SELECT id_executor,organization,fio_executor,inn_executor FROM executor")
+        self.conn.commit()
+
+    # вывод авто
+    def view_auto(self):
+        self.c.execute(f"SELECT id_auto,brand_auto,num_tractor,num_trailer,fio_driver FROM auto")
+        self.conn.commit()
 
 
 
