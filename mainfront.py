@@ -70,8 +70,8 @@ class GenAuto(QtWidgets.QWidget):
 		self.verticalLayout.addLayout(self.horizontalLayout)
 
 class TablePrint(QtWidgets.QHBoxLayout):
-	def __int__(self):
-		super().__int__()
+	def __init__(self):
+		super().__init__()
 		self.setSpacing(0)
 		self.setObjectName("horizontalLayout")
 		self.label_2 = QtWidgets.QLabel(self)

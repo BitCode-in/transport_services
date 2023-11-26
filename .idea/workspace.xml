@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4a75d23d-5725-4bdb-b6e2-ea1103e38b8d" name="Changes" comment="Table_print">
+    <list default="true" id="4a75d23d-5725-4bdb-b6e2-ea1103e38b8d" name="Changes" comment="Search_def">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mainback.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainback.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mainfront.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainfront.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -119,13 +119,30 @@
       <option name="project" value="LOCAL" />
       <updated>1701002344688</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Search_def">
+      <option name="closed" value="true" />
+      <created>1701004207156</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1701004207156</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Search_def">
+      <option name="closed" value="true" />
+      <created>1701004466217</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1701004466217</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="test" />
     <MESSAGE value="test123" />
     <MESSAGE value="Table_print" />
-    <option name="LAST_COMMIT_MESSAGE" value="Table_print" />
+    <MESSAGE value="Search_def" />
+    <option name="LAST_COMMIT_MESSAGE" value="Search_def" />
   </component>
 </project>
