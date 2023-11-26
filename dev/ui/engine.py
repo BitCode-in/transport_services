@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'engine.ui'
+# Form implementation generated from reading ui file 'ui_template/engine.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.9
 #
@@ -246,6 +246,9 @@ class Ui_widget(object):
         self.horizontalLayout.addItem(spacerItem1)
         self.lineEdit_6 = QtWidgets.QLineEdit(self.widget_3)
         self.lineEdit_6.setMinimumSize(QtCore.QSize(200, 0))
+        font = QtGui.QFont()
+        font.setFamily("Montserrat")
+        self.lineEdit_6.setFont(font)
         self.lineEdit_6.setStyleSheet("QLineEdit{\n"
 "    border-radius: 5px;\n"
 "    border: 1px solid rgb(122, 122, 122);\n"
@@ -262,7 +265,7 @@ class Ui_widget(object):
 "}")
         self.pushButton_4.setText("")
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("res/settings.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("ui_template\\../res/settings.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.pushButton_4.setIcon(icon)
         self.pushButton_4.setIconSize(QtCore.QSize(20, 20))
         self.pushButton_4.setObjectName("pushButton_4")
@@ -279,6 +282,9 @@ class Ui_widget(object):
         self.horizontalLayout.addItem(spacerItem4)
         self.lineEdit_7 = QtWidgets.QLineEdit(self.widget_3)
         self.lineEdit_7.setMinimumSize(QtCore.QSize(200, 0))
+        font = QtGui.QFont()
+        font.setFamily("Montserrat")
+        self.lineEdit_7.setFont(font)
         self.lineEdit_7.setStyleSheet("QLineEdit{\n"
 "    border-radius: 5px;\n"
 "    border: 1px solid rgb(122, 122, 122);\n"
@@ -302,7 +308,7 @@ class Ui_widget(object):
         self.label_9 = QtWidgets.QLabel(widget)
         self.label_9.setGeometry(QtCore.QRect(10, 452, 71, 71))
         self.label_9.setText("")
-        self.label_9.setPixmap(QtGui.QPixmap("res/logo.png"))
+        self.label_9.setPixmap(QtGui.QPixmap("ui_template\\../res/logo.png"))
         self.label_9.setScaledContents(True)
         self.label_9.setObjectName("label_9")
 

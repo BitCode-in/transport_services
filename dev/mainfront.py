@@ -1,196 +1,17 @@
-import sys
-import customers # таблица с заказчиками
-import executor_add # маленькие окна Исполнитель
-import customers_add # маленькие окна Зазазчик
-import executor # таблица с исполнителями
-import engine # основное окно
-import mainback
+import sys, mainback
+from ui import customers # таблица с заказчиками
+from ui import executor_add # маленькие окна Исполнитель
+from ui import customers_add # маленькие окна Зазазчик
+from ui import executor # таблица с исполнителями
+from ui import engine # основное окно
+from ui.elements import GenAuto, TablePrint, CustomPushBtn
 
 from docxtpl import DocxTemplate
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog, QMessageBox
 from datetime import date
 
-class GenAuto(QtWidgets.QWidget):
-	def __init__(self, settext):
-		super().__init__()
-		self.setMinimumSize(QtCore.QSize(0, 20))
-		self.setMaximumSize(QtCore.QSize(16777215, 20))
-		font = QtGui.QFont()
-		font.setFamily("Arial")
-		self.setFont(font)
-		self.setObjectName("widget")
-		self.verticalLayout = QtWidgets.QVBoxLayout(self)
-		self.verticalLayout.setContentsMargins(0, 0, 0, 0)
-		self.verticalLayout.setSpacing(0)
-		self.verticalLayout.setObjectName("verticalLayout")
-		self.horizontalLayout = QtWidgets.QHBoxLayout()
-		self.horizontalLayout.setSpacing(5)
-		self.horizontalLayout.setObjectName("horizontalLayout")
-		self.label_1 = QtWidgets.QLabel(self)
-		self.label_1.setMinimumSize(QtCore.QSize(30, 0))
-		self.label_1.setMaximumSize(QtCore.QSize(30, 16777215))
-		self.label_1.setFont(font)
-		self.label_1.setObjectName("label_1")
-		self.label_1.setText(settext)
-		self.horizontalLayout.addWidget(self.label_1)
-		self.lineEdit_1 = QtWidgets.QLineEdit(self)
-		self.lineEdit_1.setFont(font)
-		self.lineEdit_1.setObjectName("lineEdit_1")
-		self.lineEdit_1.setStyleSheet("QLineEdit{\n"
-"    border-radius: 5px;\n"
-"    border: 1px solid rgb(122, 122, 122);\n"
-"}")
-		self.horizontalLayout.addWidget(self.lineEdit_1)
-		self.lineEdit_2 = QtWidgets.QLineEdit(self)
-		self.lineEdit_2.setFont(font)
-		self.lineEdit_2.setObjectName("lineEdit_2")
-		self.lineEdit_2.setStyleSheet("QLineEdit{\n"
-"    border-radius: 5px;\n"
-"    border: 1px solid rgb(122, 122, 122);\n"
-"}")
-		self.horizontalLayout.addWidget(self.lineEdit_2)
-		self.lineEdit_3 = QtWidgets.QLineEdit(self)
-		self.lineEdit_3.setFont(font)
-		self.lineEdit_3.setObjectName("lineEdit_3")
-		self.lineEdit_3.setStyleSheet("QLineEdit{\n"
-"    border-radius: 5px;\n"
-"    border: 1px solid rgb(122, 122, 122);\n"
-"}")
-		self.horizontalLayout.addWidget(self.lineEdit_3)
-		self.lineEdit_4 = QtWidgets.QLineEdit(self)
-		self.lineEdit_4.setMinimumSize(QtCore.QSize(250, 0))
-		self.lineEdit_4.setFont(font)
-		self.lineEdit_4.setObjectName("lineEdit_4")
-		self.lineEdit_4.setStyleSheet("QLineEdit{\n"
-"    border-radius: 5px;\n"
-"    border: 1px solid rgb(122, 122, 122);\n"
-"}")
-		self.horizontalLayout.addWidget(self.lineEdit_4)
-		self.verticalLayout.addLayout(self.horizontalLayout)
 
-class TablePrint(QtWidgets.QWidget):
-	def __init__(self, strlb_1, strlb_2, strlb_3, strlb_4):
-		super().__init__()
-		self.setStyleSheet("QWidget{\n"
-"    border: 1px solid rgb(122, 122, 122);\n"
-"    border-color: none rgb(122, 122, 122) rgb(122, 122, 122) rgb(122, 122, 122);\n"
-"}")
-		self.setObjectName("widget")
-		self.horizontalLayout = QtWidgets.QHBoxLayout(self)
-		self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
-		self.horizontalLayout.setSpacing(0)
-		self.horizontalLayout.setObjectName("horizontalLayout")
-		self.label_2 = QtWidgets.QLabel(self)
-		self.label_2.setMinimumSize(QtCore.QSize(20, 0))
-		self.label_2.setMaximumSize(QtCore.QSize(20, 16777215))
-		self.label_2.setText(strlb_1)
-		font = QtGui.QFont()
-		font.setFamily("Montserrat")
-		self.label_2.setFont(font)
-		self.label_2.setStyleSheet("border-color: none rgb(122, 122, 122) none none;")
-		self.label_2.setObjectName("label_2")
-		self.horizontalLayout.addWidget(self.label_2)
-		self.label_3 = QtWidgets.QLabel(self)
-		self.label_3.setMinimumSize(QtCore.QSize(150, 0))
-		self.label_3.setMaximumSize(QtCore.QSize(150, 16777215))
-		self.label_3.setText(strlb_2)
-		font = QtGui.QFont()
-		font.setFamily("Montserrat")
-		self.label_3.setFont(font)
-		self.label_3.setStyleSheet("border-color: none rgb(122, 122, 122) none none;")
-		self.label_3.setObjectName("label_3")
-		self.horizontalLayout.addWidget(self.label_3)
-		self.label_4 = QtWidgets.QLabel(self)
-		self.label_4.setMinimumSize(QtCore.QSize(200, 0))
-		self.label_4.setMaximumSize(QtCore.QSize(200, 16777215))
-		self.label_4.setText(strlb_3)
-		font = QtGui.QFont()
-		font.setFamily("Montserrat")
-		self.label_4.setFont(font)
-		self.label_4.setStyleSheet("border-color: none rgb(122, 122, 122) none none;")
-		self.label_4.setObjectName("label_4")
-		self.horizontalLayout.addWidget(self.label_4)
-		self.label_7 = QtWidgets.QLabel(self)
-		self.label_7.setMinimumSize(QtCore.QSize(130, 0))
-		self.label_7.setMaximumSize(QtCore.QSize(130, 16777215))
-		self.label_7.setText(strlb_4)
-		font = QtGui.QFont()
-		font.setFamily("Montserrat")
-		self.label_7.setFont(font)
-		self.label_7.setStyleSheet("border-color: none rgb(122, 122, 122) none none;")
-		self.label_7.setObjectName("label_7")
-		self.horizontalLayout.addWidget(self.label_7)
-		self.label_9 = QtWidgets.QLabel(self)
-		self.label_9.setMinimumSize(QtCore.QSize(0, 21))
-		self.label_9.setMaximumSize(QtCore.QSize(16777215, 18))
-		self.label_9.setStyleSheet("border-color: none;")
-		self.label_9.setText("")
-		self.label_9.setObjectName("label_9")
-		self.horizontalLayout.addWidget(self.label_9)
-		self.pushButton_9 = QtWidgets.QPushButton(self)
-		self.pushButton_9.setMinimumSize(QtCore.QSize(55, 18))
-		self.pushButton_9.setMaximumSize(QtCore.QSize(16777215, 18))
-		font = QtGui.QFont()
-		font.setFamily("Montserrat")
-		font.setPointSize(7)
-		self.pushButton_9.setFont(font)
-		self.pushButton_9.setStyleSheet("QPushButton {\n"
-"    background: rgb(0, 255, 127);\n"
-"    border: 1px solid rgb(122, 122, 122);\n"
-"    border-radius: 5px;  /* Установите радиус закругления, например, 10px */\n"
-"}")
-		self.pushButton_9.setObjectName("pushButton_9")
-		self.pushButton_9.setText('Выбрать')
-		self.horizontalLayout.addWidget(self.pushButton_9)
-		self.label_18 = QtWidgets.QLabel(self)
-		self.label_18.setMinimumSize(QtCore.QSize(0, 0))
-		self.label_18.setMaximumSize(QtCore.QSize(16777215, 16777215))
-		self.label_18.setStyleSheet("border-color: none;")
-		self.label_18.setText("")
-		self.label_18.setObjectName("label_18")
-		self.horizontalLayout.addWidget(self.label_18)
-		self.pushButton_5 = QtWidgets.QPushButton(self)
-		self.pushButton_5.setMinimumSize(QtCore.QSize(55, 18))
-		self.pushButton_5.setMaximumSize(QtCore.QSize(16777215, 18))
-		font = QtGui.QFont()
-		font.setFamily("Montserrat")
-		font.setPointSize(7)
-		self.pushButton_5.setFont(font)
-		self.pushButton_5.setStyleSheet("QPushButton {\n"
-"    background: #FFB200;\n"
-"    border: 1px solid rgb(122, 122, 122);\n"
-"    border-radius: 5px;  /* Установите радиус закругления, например, 10px */\n"
-"}")
-		self.pushButton_5.setObjectName("pushButton_5")
-		self.pushButton_5.setText('Изменить')
-		self.horizontalLayout.addWidget(self.pushButton_5)
-		self.label_5 = QtWidgets.QLabel(self)
-		self.label_5.setMinimumSize(QtCore.QSize(0, 20))
-		self.label_5.setMaximumSize(QtCore.QSize(16777215, 20))
-		self.label_5.setStyleSheet("border-color: none;")
-		self.label_5.setText("")
-		self.label_5.setObjectName("label_5")
-		self.horizontalLayout.addWidget(self.label_5)
-		self.pushButton_6 = QtWidgets.QPushButton(self)
-		self.pushButton_6.setMinimumSize(QtCore.QSize(18, 18))
-		self.pushButton_6.setMaximumSize(QtCore.QSize(18, 18))
-		font = QtGui.QFont()
-		font.setFamily("Montserrat")
-		self.pushButton_6.setFont(font)
-		self.pushButton_6.setStyleSheet("QPushButton {\n"
-"    background: rgb(255, 119, 121);\n"
-"    border: 1px solid rgb(122, 122, 122);\n"
-"    border-radius: 5px;  /* Установите радиус закругления, например, 10px */\n"
-"}")
-		self.pushButton_6.setObjectName("pushButton_6")
-		self.pushButton_6.setText('-')
-		self.horizontalLayout.addWidget(self.pushButton_6)
-		self.label_10 = QtWidgets.QLabel(self)
-		self.label_10.setStyleSheet("border-color: none;")
-		self.label_10.setText("")
-		self.label_10.setObjectName("label_10")
-		self.horizontalLayout.addWidget(self.label_10)
 
 class App(QMainWindow, engine.Ui_widget):
 	def __init__(self):
@@ -199,6 +20,26 @@ class App(QMainWindow, engine.Ui_widget):
 		self.setting_init()
 		self.order_tab_sector()
 		self.generate_constraction()
+
+	def generate_constraction(self):
+		self.list_auto = []
+		temp_genauto = GenAuto(settext='1')
+		self.list_auto.append(temp_genauto)
+		self.verticalLayout_3.addWidget(temp_genauto)
+
+	def setting_init(self):
+		self.setWindowIcon(QtGui.QIcon('res/icon.png'))
+		self.pushButton.clicked.connect(self.word_create)
+		self.pushButton_2.clicked.connect(self.add_auto)
+		self.pushButton_3.clicked.connect(self.del_auto)
+		self.pushButton_4.clicked.connect(self.open_executor)
+		self.pushButton_5.clicked.connect(self.open_customers)
+		self.lineEdit_6.setReadOnly(True)
+		self.lineEdit_7.setReadOnly(True)
+		self.font = QtGui.QFont()
+		self.font.setFamily("Arial")
+		self.executor_now_id = None
+		self.customer_now_id = None
 		self.db = mainback.DB()
 
 	def open_executor(self):
@@ -210,10 +51,13 @@ class App(QMainWindow, engine.Ui_widget):
 		self.executor.setWindowTitle('Исполнители')
 		self.executor.show()
 		self.executorui.pushButton.clicked.connect(self.open_executor_add)
+		self.executorui.tableWidget.verticalHeader().setVisible(False)
 		self.executorui.tableWidget.setColumnWidth(0, 41)
 		self.executorui.tableWidget.setColumnWidth(1, 210)
-		self.executorui.tableWidget.setColumnWidth(2, 310)
+		self.executorui.tableWidget.setColumnWidth(2, 210)
 		self.executorui.tableWidget.setColumnWidth(3, 110)
+		self.executorui.tableWidget.setColumnWidth(4, 98)
+		self.executorui.tableWidget.horizontalScrollBar().setDisabled(True)
 		self.update_table_executor()
 		self.executorui.pushButton_3.clicked.connect(self.del_executor)
 		self.executorui.pushButton_2.clicked.connect(self.open_executor_update)
@@ -225,18 +69,11 @@ class App(QMainWindow, engine.Ui_widget):
 		self.db.delete_executor(int(id))
 		self.update_table_executor()
 
-#Обновление
-	def open_customers(self):
-		self.list_customers = {}
-		self.list_customers_widget = {}
-		self.customers = QMainWindow()
-		self.customersui = customers.Ui_Form()
-		self.customersui.setupUi(self.customers)
-		self.customers.setWindowIcon(QtGui.QIcon('res/icon.png'))
-		self.customers.setWindowTitle('Заказчики')
-		self.customers.show()
-		self.customersui.pushButton_2.clicked.connect(self.open_customers_add)
-
+	def take_executor(self, id):
+		executor_temp = self.db.search_executor_id(id)
+		self.executor_now_id = id
+		self.lineEdit_6.setText(f"{executor_temp[0][1]} | ИНН:{executor_temp[0][4]}")
+		self.executor.close()
 
 	def open_executor_add(self):
 		self.executor_add = QMainWindow()
@@ -279,6 +116,8 @@ class App(QMainWindow, engine.Ui_widget):
 																			   self.executor_addui.lineEdit_6.text()),
 																self.update_table_executor(),
 																self.executor_add.close()))
+
+
 	def update_table_executor(self):
 		self.list_executor = []
 		self.executorui.tableWidget.clearContents()
@@ -287,13 +126,13 @@ class App(QMainWindow, engine.Ui_widget):
 			self.executorui.tableWidget.insertRow(a)
 			self.list_executor.append(i)
 			print(i)
-			self.executorui.tableWidget.setItem(a, 0, QtWidgets.QTableWidgetItem(str(i[0])))
+			self.executorui.tableWidget.setItem(a, 0, QtWidgets.QTableWidgetItem(str(a+1)))
 			self.executorui.tableWidget.setItem(a, 1, QtWidgets.QTableWidgetItem(str(i[1])))
 			self.executorui.tableWidget.setItem(a, 2, QtWidgets.QTableWidgetItem(str(i[2])))
 			self.executorui.tableWidget.setItem(a, 3, QtWidgets.QTableWidgetItem(str(i[3])))
+			self.executorui.tableWidget.setCellWidget(a, 4, CustomPushBtn(lambda: self.take_executor(int(i[0]))))
 
 	def search_executor(self):
-
 		self.list_executor = []
 		self.executorui.tableWidget.clearContents()
 		self.executorui.tableWidget.setRowCount(0)
@@ -301,11 +140,22 @@ class App(QMainWindow, engine.Ui_widget):
 			self.executorui.tableWidget.insertRow(a)
 			self.list_executor.append(i)
 			print(i)
-			self.executorui.tableWidget.setItem(a, 0, QtWidgets.QTableWidgetItem(str(i[0])))
+			self.executorui.tableWidget.setItem(a, 0, QtWidgets.QTableWidgetItem(str(a+1)))
 			self.executorui.tableWidget.setItem(a, 1, QtWidgets.QTableWidgetItem(str(i[1])))
 			self.executorui.tableWidget.setItem(a, 2, QtWidgets.QTableWidgetItem(str(i[2])))
 			self.executorui.tableWidget.setItem(a, 3, QtWidgets.QTableWidgetItem(str(i[4])))
+			self.executorui.tableWidget.setCellWidget(a, 4, CustomPushBtn(lambda: self.take_executor(int(i[0]))))
 
+	def open_customers(self):
+		self.list_customers = {}
+		self.list_customers_widget = {}
+		self.customers = QMainWindow()
+		self.customersui = customers.Ui_Form()
+		self.customersui.setupUi(self.customers)
+		self.customers.setWindowIcon(QtGui.QIcon('res/icon.png'))
+		self.customers.setWindowTitle('Заказчики')
+		self.customers.show()
+		self.customersui.pushButton_2.clicked.connect(self.open_customers_add)
 
 	def open_customers_add(self):
 		self.customers_add = QMainWindow()
@@ -327,21 +177,7 @@ class App(QMainWindow, engine.Ui_widget):
 			self.verticalLayout_3.removeWidget(self.list_auto[-1])
 			self.list_auto.pop(-1)
 
-	def generate_constraction(self):
-		self.list_auto = []
-		temp_genauto = GenAuto(settext='1')
-		self.list_auto.append(temp_genauto)
-		self.verticalLayout_3.addWidget(temp_genauto)
 
-	def setting_init(self):
-		self.setWindowIcon(QtGui.QIcon('res/icon.png'))
-		self.pushButton.clicked.connect(self.word_create)
-		self.pushButton_2.clicked.connect(self.add_auto)
-		self.pushButton_3.clicked.connect(self.del_auto)
-		self.pushButton_4.clicked.connect(self.open_executor)
-		self.pushButton_5.clicked.connect(self.open_customers)
-		self.font = QtGui.QFont()
-		self.font.setFamily("Arial")
 
 		
 
