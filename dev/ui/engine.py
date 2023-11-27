@@ -9,22 +9,24 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+import os
 
 
 class Ui_widget(object):
     def setupUi(self, widget):
+        self.tempwidget = widget
         widget.setObjectName("widget")
         widget.resize(705, 528)
         self.label = QtWidgets.QLabel(widget)
         self.label.setGeometry(QtCore.QRect(12, 12, 110, 16))
         font = QtGui.QFont()
-        font.setFamily("Montserrat")
+        font.setFamily("Arial")
         self.label.setFont(font)
         self.label.setObjectName("label")
         self.lineEdit_5 = QtWidgets.QLineEdit(widget)
         self.lineEdit_5.setGeometry(QtCore.QRect(204, 136, 471, 21))
         font = QtGui.QFont()
-        font.setFamily("Montserrat")
+        font.setFamily("Arial")
         self.lineEdit_5.setFont(font)
         self.lineEdit_5.setStyleSheet("QLineEdit{\n"
 "    border-radius: 5px;\n"
@@ -34,7 +36,7 @@ class Ui_widget(object):
         self.lineEdit_3 = QtWidgets.QLineEdit(widget)
         self.lineEdit_3.setGeometry(QtCore.QRect(204, 74, 471, 21))
         font = QtGui.QFont()
-        font.setFamily("Montserrat")
+        font.setFamily("Arial")
         self.lineEdit_3.setFont(font)
         self.lineEdit_3.setStyleSheet("QLineEdit{\n"
 "    border-radius: 5px;\n"
@@ -44,25 +46,25 @@ class Ui_widget(object):
         self.label_3 = QtWidgets.QLabel(widget)
         self.label_3.setGeometry(QtCore.QRect(12, 74, 184, 16))
         font = QtGui.QFont()
-        font.setFamily("Montserrat")
+        font.setFamily("Arial")
         self.label_3.setFont(font)
         self.label_3.setObjectName("label_3")
         self.label_5 = QtWidgets.QLabel(widget)
         self.label_5.setGeometry(QtCore.QRect(12, 136, 63, 16))
         font = QtGui.QFont()
-        font.setFamily("Montserrat")
+        font.setFamily("Arial")
         self.label_5.setFont(font)
         self.label_5.setObjectName("label_5")
         self.label_4 = QtWidgets.QLabel(widget)
         self.label_4.setGeometry(QtCore.QRect(12, 105, 112, 16))
         font = QtGui.QFont()
-        font.setFamily("Montserrat")
+        font.setFamily("Arial")
         self.label_4.setFont(font)
         self.label_4.setObjectName("label_4")
         self.lineEdit = QtWidgets.QLineEdit(widget)
         self.lineEdit.setGeometry(QtCore.QRect(204, 12, 471, 21))
         font = QtGui.QFont()
-        font.setFamily("Montserrat")
+        font.setFamily("Arial")
         self.lineEdit.setFont(font)
         self.lineEdit.setStyleSheet("QLineEdit{\n"
 "    border-radius: 5px;\n"
@@ -72,7 +74,7 @@ class Ui_widget(object):
         self.lineEdit_2 = QtWidgets.QLineEdit(widget)
         self.lineEdit_2.setGeometry(QtCore.QRect(204, 43, 471, 21))
         font = QtGui.QFont()
-        font.setFamily("Montserrat")
+        font.setFamily("Arial")
         self.lineEdit_2.setFont(font)
         self.lineEdit_2.setStyleSheet("QLineEdit{\n"
 "    border-radius: 5px;\n"
@@ -82,7 +84,7 @@ class Ui_widget(object):
         self.lineEdit_4 = QtWidgets.QLineEdit(widget)
         self.lineEdit_4.setGeometry(QtCore.QRect(204, 105, 471, 21))
         font = QtGui.QFont()
-        font.setFamily("Montserrat")
+        font.setFamily("Arial")
         self.lineEdit_4.setFont(font)
         self.lineEdit_4.setStyleSheet("QLineEdit{\n"
 "    border-radius: 5px;\n"
@@ -92,13 +94,13 @@ class Ui_widget(object):
         self.label_2 = QtWidgets.QLabel(widget)
         self.label_2.setGeometry(QtCore.QRect(12, 43, 43, 16))
         font = QtGui.QFont()
-        font.setFamily("Montserrat")
+        font.setFamily("Arial")
         self.label_2.setFont(font)
         self.label_2.setObjectName("label_2")
         self.pushButton = QtWidgets.QPushButton(widget)
         self.pushButton.setGeometry(QtCore.QRect(490, 470, 201, 32))
         font = QtGui.QFont()
-        font.setFamily("Montserrat")
+        font.setFamily("Arial")
         self.pushButton.setFont(font)
         self.pushButton.setStyleSheet("QPushButton {\n"
 "    background: rgb(0, 255, 127);\n"
@@ -109,7 +111,7 @@ class Ui_widget(object):
         self.scrollArea = QtWidgets.QScrollArea(widget)
         self.scrollArea.setGeometry(QtCore.QRect(10, 180, 681, 221))
         font = QtGui.QFont()
-        font.setFamily("Montserrat")
+        font.setFamily("Arial")
         self.scrollArea.setFont(font)
         self.scrollArea.setAutoFillBackground(False)
         self.scrollArea.setStyleSheet("QScrollArea{\n"
@@ -131,7 +133,7 @@ class Ui_widget(object):
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
         self.label_6 = QtWidgets.QLabel(self.scrollAreaWidgetContents_2)
         font = QtGui.QFont()
-        font.setFamily("Montserrat")
+        font.setFamily("Arial")
         self.label_6.setFont(font)
         self.label_6.setObjectName("label_6")
         self.horizontalLayout_2.addWidget(self.label_6)
@@ -139,7 +141,7 @@ class Ui_widget(object):
         self.pushButton_2.setMinimumSize(QtCore.QSize(20, 20))
         self.pushButton_2.setMaximumSize(QtCore.QSize(20, 20))
         font = QtGui.QFont()
-        font.setFamily("Montserrat")
+        font.setFamily("Arial")
         self.pushButton_2.setFont(font)
         self.pushButton_2.setStyleSheet("QPushButton {\n"
 "    background: rgb(0, 255, 127);\n"
@@ -152,7 +154,7 @@ class Ui_widget(object):
         self.pushButton_3.setMinimumSize(QtCore.QSize(20, 20))
         self.pushButton_3.setMaximumSize(QtCore.QSize(20, 20))
         font = QtGui.QFont()
-        font.setFamily("Montserrat")
+        font.setFamily("Arial")
         self.pushButton_3.setFont(font)
         self.pushButton_3.setStyleSheet("QPushButton {\n"
 "    background: rgb(255, 119, 121);\n"
@@ -166,7 +168,7 @@ class Ui_widget(object):
         self.widget_2.setMinimumSize(QtCore.QSize(0, 20))
         self.widget_2.setMaximumSize(QtCore.QSize(16777215, 20))
         font = QtGui.QFont()
-        font.setFamily("Montserrat")
+        font.setFamily("Arial")
         self.widget_2.setFont(font)
         self.widget_2.setObjectName("widget_2")
         self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.widget_2)
@@ -179,7 +181,7 @@ class Ui_widget(object):
         self.label_26 = QtWidgets.QLabel(self.widget_2)
         self.label_26.setMaximumSize(QtCore.QSize(30, 30))
         font = QtGui.QFont()
-        font.setFamily("Montserrat")
+        font.setFamily("Arial")
         self.label_26.setFont(font)
         self.label_26.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.label_26.setObjectName("label_26")
@@ -188,7 +190,7 @@ class Ui_widget(object):
         self.label_27.setMinimumSize(QtCore.QSize(0, 0))
         self.label_27.setMaximumSize(QtCore.QSize(16777215, 20))
         font = QtGui.QFont()
-        font.setFamily("Montserrat")
+        font.setFamily("Arial")
         self.label_27.setFont(font)
         self.label_27.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.label_27.setObjectName("label_27")
@@ -196,7 +198,7 @@ class Ui_widget(object):
         self.label_28 = QtWidgets.QLabel(self.widget_2)
         self.label_28.setMaximumSize(QtCore.QSize(16777215, 30))
         font = QtGui.QFont()
-        font.setFamily("Montserrat")
+        font.setFamily("Arial")
         self.label_28.setFont(font)
         self.label_28.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.label_28.setObjectName("label_28")
@@ -204,7 +206,7 @@ class Ui_widget(object):
         self.label_29 = QtWidgets.QLabel(self.widget_2)
         self.label_29.setMaximumSize(QtCore.QSize(16777215, 30))
         font = QtGui.QFont()
-        font.setFamily("Montserrat")
+        font.setFamily("Arial")
         self.label_29.setFont(font)
         self.label_29.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.label_29.setObjectName("label_29")
@@ -213,7 +215,7 @@ class Ui_widget(object):
         self.label_30.setMinimumSize(QtCore.QSize(250, 0))
         self.label_30.setMaximumSize(QtCore.QSize(16777215, 30))
         font = QtGui.QFont()
-        font.setFamily("Montserrat")
+        font.setFamily("Arial")
         self.label_30.setFont(font)
         self.label_30.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.label_30.setObjectName("label_30")
@@ -238,7 +240,7 @@ class Ui_widget(object):
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.label_7 = QtWidgets.QLabel(self.widget_3)
         font = QtGui.QFont()
-        font.setFamily("Montserrat")
+        font.setFamily("Arial")
         self.label_7.setFont(font)
         self.label_7.setObjectName("label_7")
         self.horizontalLayout.addWidget(self.label_7)
@@ -247,7 +249,7 @@ class Ui_widget(object):
         self.lineEdit_6 = QtWidgets.QLineEdit(self.widget_3)
         self.lineEdit_6.setMinimumSize(QtCore.QSize(200, 0))
         font = QtGui.QFont()
-        font.setFamily("Montserrat")
+        font.setFamily("Arial")
         self.lineEdit_6.setFont(font)
         self.lineEdit_6.setStyleSheet("QLineEdit{\n"
 "    border-radius: 5px;\n"
@@ -265,7 +267,7 @@ class Ui_widget(object):
 "}")
         self.pushButton_4.setText("")
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("ui_template\\../res/settings.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap(f"{os.getcwd()}/res/settings.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.pushButton_4.setIcon(icon)
         self.pushButton_4.setIconSize(QtCore.QSize(20, 20))
         self.pushButton_4.setObjectName("pushButton_4")
@@ -274,7 +276,7 @@ class Ui_widget(object):
         self.horizontalLayout.addItem(spacerItem3)
         self.label_8 = QtWidgets.QLabel(self.widget_3)
         font = QtGui.QFont()
-        font.setFamily("Montserrat")
+        font.setFamily("Arial")
         self.label_8.setFont(font)
         self.label_8.setObjectName("label_8")
         self.horizontalLayout.addWidget(self.label_8)
@@ -283,7 +285,7 @@ class Ui_widget(object):
         self.lineEdit_7 = QtWidgets.QLineEdit(self.widget_3)
         self.lineEdit_7.setMinimumSize(QtCore.QSize(200, 0))
         font = QtGui.QFont()
-        font.setFamily("Montserrat")
+        font.setFamily("Arial")
         self.lineEdit_7.setFont(font)
         self.lineEdit_7.setStyleSheet("QLineEdit{\n"
 "    border-radius: 5px;\n"
@@ -308,7 +310,7 @@ class Ui_widget(object):
         self.label_9 = QtWidgets.QLabel(widget)
         self.label_9.setGeometry(QtCore.QRect(10, 452, 71, 71))
         self.label_9.setText("")
-        self.label_9.setPixmap(QtGui.QPixmap("ui_template\\../res/logo.png"))
+        self.label_9.setPixmap(QtGui.QPixmap(f"{os.getcwd()}/res/logo.png"))
         self.label_9.setScaledContents(True)
         self.label_9.setObjectName("label_9")
 
