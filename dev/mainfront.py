@@ -14,12 +14,15 @@ from datetime import date
 
 
 class App(QMainWindow, engine.Ui_widget):
+
 	def __init__(self):
 		super().__init__()
 		self.setupUi(self)
 		self.setting_init()
 		self.order_tab_sector()
 		self.generate_constraction()
+		self.data_customer = []
+		self.data_executor = []
 
 	def generate_constraction(self):
 		self.list_auto = []
@@ -41,6 +44,7 @@ class App(QMainWindow, engine.Ui_widget):
 		self.executor_now = None
 		self.customer_now = None
 		self.db = mainback.DB()
+		self.set_auto = None
 
 	def open_executor(self):
 		self.list_executor = {}
@@ -69,12 +73,27 @@ class App(QMainWindow, engine.Ui_widget):
 		self.db.delete_executor(int(id))
 		self.update_table_executor()
 
+	def del_customer(self):
+		num = self.customersui.tableWidget.currentRow()
+		id = self.list_customers[num][0]
+		self.db.delete_customer(int(id))
+		self.update_table_customers()
+
 	def take_executor(self, id):
 		executor_temp = self.db.search_executor_id(id)
 		self.executor_now = executor_temp[0]
 		self.lineEdit_6.setText(f"{executor_temp[0][1]} | ИНН:{executor_temp[0][4]}")
 		self.executor.close()
 		print(self.executor_now)
+		self.data_executor = self.executor_now
+
+	def take_customers(self, id):
+		customer_temp = self.db.search_customer_id(id)
+		self.customer_now = customer_temp[0]
+		self.lineEdit_7.setText(f"{customer_temp[0][1]} | ИНН:{customer_temp[0][4]}")
+		self.customers.close()
+		print(self.customer_now)
+		self.data_customer = self.customer_now
 
 	def open_executor_add(self):
 		self.executor_add = QMainWindow()
@@ -96,7 +115,7 @@ class App(QMainWindow, engine.Ui_widget):
 		self.executor_add = QMainWindow()
 		self.executor_addui = executor_add.Ui_Form()
 		self.executor_addui.setupUi(self.executor_add)
-		self.executor_add.setWindowIcon(QtGui.QIcon('res/icon.png'))
+		self.executor_add.setWindowIcon(QtGui.QIcon('de/res/icon.png'))
 		self.executor_add.setWindowTitle('Изменить исполнителя')
 		num = self.executorui.tableWidget.currentRow()
 		id = self.list_executor[num][0]
@@ -145,31 +164,111 @@ class App(QMainWindow, engine.Ui_widget):
 			self.executorui.tableWidget.setItem(a, 3, QtWidgets.QTableWidgetItem(str(i[4])))
 			self.executorui.tableWidget.setCellWidget(a, 4, CustomPushBtn(self.take_executor, i[0]))
 
+	def search_customers(self):
+		self.list_customers = []
+		self.customersui.tableWidget.clearContents()
+		self.customersui.tableWidget.setRowCount(0)
+		for a, i in enumerate(self.db.search_customer(self.customersui.lineEdit.text())):
+			self.customersui.tableWidget.insertRow(a)
+			self.list_customers.append(i)
+			self.customersui.tableWidget.setItem(a, 0, QtWidgets.QTableWidgetItem(str(a+1)))
+			self.customersui.tableWidget.setItem(a, 1, QtWidgets.QTableWidgetItem(str(i[1])))
+			self.customersui.tableWidget.setItem(a, 2, QtWidgets.QTableWidgetItem(str(i[2])))
+			self.customersui.tableWidget.setItem(a, 3, QtWidgets.QTableWidgetItem(str(i[4])))
+			self.customersui.tableWidget.setCellWidget(a, 4, CustomPushBtn(self.take_customers, i[0]))
+
 	def open_customers(self):
 		self.list_customers = {}
 		self.list_customers_widget = {}
 		self.customers = QMainWindow()
 		self.customersui = customers.Ui_Form()
 		self.customersui.setupUi(self.customers)
-		self.customers.setWindowIcon(QtGui.QIcon('res/icon.png'))
+		self.customers.setWindowIcon(QtGui.QIcon('dev/res/icon.png'))
 		self.customers.setWindowTitle('Заказчики')
 		self.customers.show()
-		self.customersui.pushButton_2.clicked.connect(self.open_customers_add)
+		self.customersui.pushButton.clicked.connect(self.open_customers_add)
+		self.customersui.tableWidget.verticalHeader().setVisible(False)
+		self.customersui.tableWidget.setColumnWidth(0, 41)
+		self.customersui.tableWidget.setColumnWidth(1, 210)
+		self.customersui.tableWidget.setColumnWidth(2, 210)
+		self.customersui.tableWidget.setColumnWidth(3, 110)
+		self.customersui.tableWidget.setColumnWidth(4, 98)
+		self.customersui.tableWidget.horizontalScrollBar().setDisabled(True)
+		self.update_table_customers()
+		self.customersui.pushButton_4.clicked.connect(self.search_customers)
+		self.customersui.pushButton_3.clicked.connect(self.del_customer)
+		self.customersui.pushButton_2.clicked.connect(self.open_customers_update)
+
 
 	def open_customers_add(self):
 		self.customers_add = QMainWindow()
 		self.customers_addui = customers_add.Ui_Form()
 		self.customers_addui.setupUi(self.customers_add)
-		self.customers_add.setWindowIcon(QtGui.QIcon('res/icon.png'))
+		self.customers_add.setWindowIcon(QtGui.QIcon('dev/res/icon.png'))
 		self.customers_add.setWindowTitle('Добавить заказчика')
 		self.customers_add.show()
+		self.customers_addui.pushButton.clicked.connect(
+			lambda: (self.db.insert_customer(self.customers_addui.lineEdit.text(),
+											 self.customers_addui.lineEdit_2.text(),
+											 self.customers_addui.lineEdit_3.text(),
+											 self.customers_addui.lineEdit_4.text(),
+											 self.customers_addui.lineEdit_5.text(),
+											 self.customers_addui.lineEdit_7.text(),
+											 self.customers_addui.lineEdit_6.text()),
+					 self.update_table_customers(), self.customers_add.close()))
+	def open_customers_update(self):
+		self.customers_add = QMainWindow()
+		self.customers_addui = customers_add.Ui_Form()
+		self.customers_addui.setupUi(self.customers_add)
+		self.customers_add.setWindowIcon(QtGui.QIcon('de/res/icon.png'))
+		self.customers_add.setWindowTitle('Изменить заказчика')
+		num = self.customersui.tableWidget.currentRow()
+		id = self.list_customers[num][0]
+		customers_temp = self.db.search_customer_id(id)
+		self.customers_addui.lineEdit.setText(str(customers_temp[0][1]))
+		self.customers_addui.lineEdit_2.setText(str(customers_temp[0][2]))
+		self.customers_addui.lineEdit_3.setText(str(customers_temp[0][3]))
+		self.customers_addui.lineEdit_4.setText(str(customers_temp[0][4]))
+		self.customers_addui.lineEdit_5.setText(str(customers_temp[0][5]))
+		self.customers_addui.lineEdit_7.setText(str(customers_temp[0][6]))
+		self.customers_addui.lineEdit_6.setText(str(customers_temp[0][7]))
+		self.customers_add.show()
+		self.customers_addui.pushButton.clicked.connect(
+			lambda: (self.db.update_customer(id,
+																						self.customers_addui.lineEdit.text(),
+																						self.customers_addui.lineEdit_2.text(),
+																						self.customers_addui.lineEdit_3.text(),
+																						self.customers_addui.lineEdit_4.text(),
+																						self.customers_addui.lineEdit_5.text(),
+																						self.customers_addui.lineEdit_7.text(),
+																						self.customers_addui.lineEdit_6.text()),
+																self.update_table_customers(),
+																self.customers_add.close()))
+
+	def update_table_customers(self):
+		self.list_customers = []
+		self.customersui.tableWidget.clearContents()
+		self.customersui.tableWidget.setRowCount(0)
+		for a, i in enumerate(self.db.view_customer()):
+			self.customersui.tableWidget.insertRow(a)
+			self.list_customers.append(i)
+			self.customersui.tableWidget.setItem(a, 0, QtWidgets.QTableWidgetItem(str(a + 1)))
+			self.customersui.tableWidget.setItem(a, 1, QtWidgets.QTableWidgetItem(str(i[1])))
+			self.customersui.tableWidget.setItem(a, 2, QtWidgets.QTableWidgetItem(str(i[2])))
+			self.customersui.tableWidget.setItem(a, 3, QtWidgets.QTableWidgetItem(str(i[3])))
+			self.customersui.tableWidget.setCellWidget(a, 4, CustomPushBtn(self.take_customers, i[0]))
 
 	def add_auto(self):
 		temp_genauto = GenAuto(settext=str(len(self.list_auto)+1))
 		self.list_auto.append(temp_genauto)
 		self.verticalLayout_3.addWidget(temp_genauto)
-		for i in self.list_auto:
-			print(i.lineEdit_1.text())
+
+	def data_auto(self):
+		str_auto = ""
+		for a, i in enumerate(self.list_auto):
+			str_auto += str(a+1)+". " + i.lineEdit_1.text() + " " + i.lineEdit_2.text() + " " + i.lineEdit_3.text() + " " + i.lineEdit_4.text() + "\n"
+		self.set_auto = str_auto
+
 
 	def del_auto(self):
 		if len(self.list_auto) > 1:
@@ -218,43 +317,33 @@ class App(QMainWindow, engine.Ui_widget):
 
 		name_save = QFileDialog.getExistingDirectory()
 
-
-		if self.lineEdit_10.text() == "":
-			a = " "
-			b = " "
-			c = " "
-			d = " "
-
-		else:
-			a = self.lineEdit_10.text()
-			b = self.lineEdit_11.text()
-			c = self.lineEdit_12.text()
-			d = self.lineEdit_13.text()
-
 		year = date.today()
-		doc = DocxTemplate("agreement.docx")
-		context = {'number': '№' + ' ' + self.lineEdit.text(),
-				   'city': self.lineEdit_2.text(),
-				   'year': full_year,
-				   'organization': self.lineEdit_3.text(),
-				   'price': self.lineEdit_4.text(),
-				   'route': self.lineEdit_5.text(),
+		doc = DocxTemplate("/Users/artyom/Desktop/Python/transport_services/dev/docx/agreement_2.docx")
+		self.data_auto()
+		context = {'number': '№' + ' ' + self.lineEdit.text(), # № договора
+				   'city': self.lineEdit_2.text(), # город
+				   'year': full_year, # дата
+				   'price': self.lineEdit_4.text(), # цена
+				   'culture' :self.lineEdit_3.text(),# культура
+				   'route': self.lineEdit_5.text(), # маршрут
 
-				   'mark1':self.lineEdit_6.text(),
-				   'num_t1': self.lineEdit_7.text(),
-				   'num_p1': self.lineEdit_8.text(),
-				   'fio_v1': self.lineEdit_9.text(),
+				   'auto':self.set_auto, # авто
 
-				   'mark2': a,
-				   'num_t2': b,
-				   'num_p2': c,
-				   'fio_v2': d,
+				   'organization': self.data_executor[1], # исполнитель
+				   'inn': self.data_executor[4], # инн исполнителя
+				   'address': self.data_executor[3], # адрес исполнителя
+				   'pc': self.data_executor[5], # рс исполнителя
+				   'bik': self.data_executor[6],# бик исполнителя
+				   'fio': self.data_executor[2], # фио исполнителя
 
-				   'inn': self.lineEdit_18.text(),
-				   'address': self.lineEdit_19.text(),
-				   'pc': self.lineEdit_20.text(),
-				   'bik': self.lineEdit_21.text(),
-				   'fio': self.lineEdit_22.text()}
+				   'customer': self.data_customer[1],  # заказчик
+				   'inn_customer': self.data_customer[4],  # инн заказчика
+				   'address_customer': self.data_customer[3],  # адрес заказчика
+				   'pc_customer': self.data_customer[5],  # рс заказчика
+				   'name_bank_customer': self.data_customer[6],# название банка заказчика
+				   'bik_customer': self.data_customer[1],  # бик заказчика
+				   'fio_customer': self.data_customer[2],  # фио заказчика
+				   }
 
 		doc.render(context)
 		doc.save(f'{name_save}/Договор № {self.lineEdit.text()}.docx')
@@ -274,17 +363,10 @@ class App(QMainWindow, engine.Ui_widget):
 		self.lineEdit_5.clear()
 		self.lineEdit_6.clear()
 		self.lineEdit_7.clear()
-		self.lineEdit_8.clear()
-		self.lineEdit_9.clear()
-		self.lineEdit_10.clear()
-		self.lineEdit_11.clear()
-		self.lineEdit_12.clear()
-		self.lineEdit_13.clear()
-		self.lineEdit_18.clear()
-		self.lineEdit_19.clear()
-		self.lineEdit_20.clear()
-		self.lineEdit_21.clear()
-		self.lineEdit_22.clear()
+		for i in self.list_auto.copy():
+			self.verticalLayout_3.removeWidget(self.list_auto[-1])
+			self.list_auto.pop(-1)
+		self.generate_constraction()
 
 
 

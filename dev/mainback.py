@@ -66,10 +66,10 @@ class DB:
 	# добавление исполнителя
 	def insert_customer(self, organization, fio_customer, address_customer, inn_customer,
 						rc_customer, name_bank_customer, bik_customer):
-		self.c.execute(f"""INSERT INTO customer (organization, fio_customer, address_customer, inn_customer,
+		self.c.execute("""INSERT INTO customer (organization, fio_customer, address_customer, inn_customer,
 						rc_customer, name_bank_customer, bik_customer)
-						  VALUES ({organization}, {fio_customer}, {address_customer}, {inn_customer}, {rc_customer},
-						  {name_bank_customer}, {bik_customer})""")
+						  VALUES (?, ?, ?, ?, ?, ?, ?)""", (organization, fio_customer, address_customer, inn_customer,
+						rc_customer, name_bank_customer, bik_customer))
 		self.conn.commit()
 
 	# добавление заказчика
@@ -79,17 +79,17 @@ class DB:
 		self.conn.commit()
 
 	# добавление авто
-	def insert_auto(self, id_executor, brand_auto, num_tractor, num_trailer, fio_driver):
-		self.c.execute(f"""INSERT INTO auto (id_executor, brand_auto, num_tractor, num_trailer,fio_driver)
-						  VALUES ({id_executor}, {brand_auto}, {num_tractor}, {num_trailer}, {fio_driver})""")
-		self.conn.commit()
+	# def insert_auto(self, id_executor, brand_auto, num_tractor, num_trailer, fio_driver):
+	# 	self.c.execute(f"""INSERT INTO auto (id_executor, brand_auto, num_tractor, num_trailer,fio_driver)
+	# 					  VALUES ({id_executor}, {brand_auto}, {num_tractor}, {num_trailer}, {fio_driver})""")
+	# 	self.conn.commit()
 
 	# изменить исполнителя
 	def update_customer(self, id_customer, organization, fio_customer, address_customer, inn_customer,
 						rc_customer, name_bank_customer, bik_customer):
 		self.c.execute(f"""UPDATE customer 
-						SET organization={organization}, fio_customer={fio_customer}, address_customer={address_customer},
-						inn_customer={inn_customer}, rc_customer={rc_customer}, name_bank_customer={name_bank_customer},
+						SET organization='{organization}', fio_customer='{fio_customer}', address_customer='{address_customer}',
+						inn_customer={inn_customer}, rc_customer={rc_customer}, name_bank_customer='{name_bank_customer}',
 						bik_customer={bik_customer}
 						WHERE id_customer={id_customer}""")
 		self.conn.commit()
@@ -104,12 +104,12 @@ class DB:
 		self.conn.commit()
 
 	# изменить авто
-	def update_auto(self, id_auto, brand_auto, num_tractor, num_trailer, fio_driver):
-		self.c.execute(f"""UPDATE auto 
-						SET brand_auto={brand_auto}, num_tractor={num_tractor}, num_trailer={num_trailer},
-						fio_driver={fio_driver}
-						WHERE id_auto={id_auto}""")
-		self.conn.commit()
+	# def update_auto(self, id_auto, brand_auto, num_tractor, num_trailer, fio_driver):
+	# 	self.c.execute(f"""UPDATE auto
+	# 					SET brand_auto={brand_auto}, num_tractor={num_tractor}, num_trailer={num_trailer},
+	# 					fio_driver={fio_driver}
+	# 					WHERE id_auto={id_auto}""")
+	# 	self.conn.commit()
 
 	# удалить исполнителя
 	def delete_customer(self, id_customer):
@@ -122,21 +122,19 @@ class DB:
 		self.conn.commit()
 
 	# удалить авто
-	def delete_auto(self, id_auto):
-		self.c.execute(f"DELETE FROM auto WHERE id_auto = {id_auto}")
-		self.conn.commit()
+	# def delete_auto(self, id_auto):
+	# 	self.c.execute(f"DELETE FROM auto WHERE id_auto = {id_auto}")
+	# 	self.conn.commit()
 
 	# поиск исполнителя
 	def search_customer(self, name_search):
-		self.c.execute(f"""SELECT id_customer,organization,fio_customer,inn_customer 
-		FROM customer WHERE organization LIKE '%{name_search}%' 
-		or fio_customer LIKE '%{name_search}% or inn_customer LIKE '%{name_search}%'""")
+		self.c.execute(f"""SELECT * FROM customer WHERE organization LIKE '%{name_search}%' 
+		or fio_customer LIKE '%{name_search}%' or inn_customer LIKE '%{name_search}%'""")
 		return self.c.fetchall()
 
 	# поиск исполнителя по айди
 	def search_customer_id(self, id_customer):
-		self.c.execute(f"""SELECT id_customer,organization,fio_customer,inn_customer 
-		FROM customer WHERE id_customer={id_customer}""")
+		self.c.execute(f"""SELECT * FROM customer WHERE id_customer={id_customer}""")
 		return self.c.fetchall()
 
 	# поиск заказчика
@@ -164,10 +162,10 @@ class DB:
 		#self.conn.commit()
 
 	# вывод авто
-	def view_auto(self):
-		self.c.execute(f"SELECT id_auto,brand_auto,num_tractor,num_trailer,fio_driver FROM auto")
-		return self.c.fetchall()
-		#self.conn.commit()
+	# def view_auto(self):
+	# 	self.c.execute(f"SELECT id_auto,brand_auto,num_tractor,num_trailer,fio_driver FROM auto")
+	# 	return self.c.fetchall()
+	# 	#self.conn.commit()
 
 
 
