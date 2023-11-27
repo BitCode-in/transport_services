@@ -8,6 +8,7 @@ from ui.elements import GenAuto, TablePrint, CustomPushBtn
 
 from docxtpl import DocxTemplate
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog, QMessageBox
 from datetime import date
 
@@ -266,93 +267,91 @@ class App(QMainWindow, engine.Ui_widget):
 	def data_auto(self):
 		str_auto = ""
 		for a, i in enumerate(self.list_auto):
-			str_auto += str(a+1)+". " + i.lineEdit_1.text() + " " + i.lineEdit_2.text() + " " + i.lineEdit_3.text() + " " + i.lineEdit_4.text() + "\n"
+			str_auto += "\t" + str(a+1) + ". " + i.lineEdit_1.text() + " | " + i.lineEdit_2.text() + " | " + i.lineEdit_3.text() + " | " + i.lineEdit_4.text() + " |\n"
 		self.set_auto = str_auto
-
 
 	def del_auto(self):
 		if len(self.list_auto) > 1:
 			self.verticalLayout_3.removeWidget(self.list_auto[-1])
 			self.list_auto.pop(-1)
-
-
-
 		
 
 	def order_tab_sector(self):
-		pass
-		# self.tempwidget.setTabOrder(self.lineEdit, self.lineEdit_2)
-		# self.tempwidget.setTabOrder(self.lineEdit_2, self.lineEdit_3)
-		# self.tempwidget.setTabOrder(self.lineEdit_3, self.lineEdit_4)
-		# self.tempwidget.setTabOrder(self.lineEdit_4, self.lineEdit_5)
-		# self.tempwidget.setTabOrder(self.lineEdit_5, self.lineEdit_18)
-		# self.tempwidget.setTabOrder(self.lineEdit_18, self.lineEdit_19)
-		# self.tempwidget.setTabOrder(self.lineEdit_19, self.lineEdit_20)
-		# self.tempwidget.setTabOrder(self.lineEdit_20, self.lineEdit_21)
-		# self.tempwidget.setTabOrder(self.lineEdit_21, self.lineEdit_22)
-		# self.tempwidget.setTabOrder(self.lineEdit_22, self.pushButton)
+		self.tempwidget.setTabOrder(self.lineEdit, self.lineEdit_2)
+		self.tempwidget.setTabOrder(self.lineEdit_2, self.lineEdit_3)
+		self.tempwidget.setTabOrder(self.lineEdit_3, self.lineEdit_4)
+		self.tempwidget.setTabOrder(self.lineEdit_4, self.lineEdit_5)
+		self.tempwidget.setTabOrder(self.lineEdit_5, self.pushButton)
 
 # вставка в ворд
 	def word_create(self):
+		try:
+			dict_month = {'01': 'января',
+						  '02': 'февраля',
+						  '03': 'марта',
+						  '04': 'апреля',
+						  '05': 'мая',
+						  '06': 'июня',
+						  '07': 'июля',
+						  '08': 'августа',
+						  '09': 'сентября',
+						  '10': 'октября',
+						  '11': 'ноября',
+						  '12': 'декабря'
+						  }
 
-		dict_month = {'01': 'января',
-					  '02': 'февраля',
-					  '03': 'марта',
-					  '04': 'апреля',
-					  '05': 'мая',
-					  '06': 'июня',
-					  '07': 'июля',
-					  '08': 'августа',
-					  '09': 'сентября',
-					  '10': 'октября',
-					  '11': 'ноября',
-					  '12': 'декабря'
-					  }
+			year = date.today().year
+			month = date.today().month
+			day = date.today().day
 
-		year = date.today().year
-		month = date.today().month
-		day = date.today().day
+			full_year = str(day) + ' ' + dict_month[f'{month}'] + ' ' + str(year) + ' г.'
 
-		full_year = str(day) + ' ' + dict_month[f'{month}'] + ' ' + str(year) + ' г.'
+			name_save = QFileDialog.getExistingDirectory()
 
-		name_save = QFileDialog.getExistingDirectory()
+			year = date.today()
+			doc = DocxTemplate("./docx/agreement.docx")
+			self.data_auto()
+			context = {'number': '№' + ' ' + self.lineEdit.text(), # № договора
+					   'city': self.lineEdit_2.text(), # город
+					   'year': full_year, # дата
+					   'price': self.lineEdit_4.text(), # цена
+					   'culture' :self.lineEdit_3.text(),# культура
+					   'route': self.lineEdit_5.text(), # маршрут
 
-		year = date.today()
-		doc = DocxTemplate("/Users/artyom/Desktop/Python/transport_services/dev/docx/agreement_2.docx")
-		self.data_auto()
-		context = {'number': '№' + ' ' + self.lineEdit.text(), # № договора
-				   'city': self.lineEdit_2.text(), # город
-				   'year': full_year, # дата
-				   'price': self.lineEdit_4.text(), # цена
-				   'culture' :self.lineEdit_3.text(),# культура
-				   'route': self.lineEdit_5.text(), # маршрут
+					   'auto':self.set_auto, # авто
 
-				   'auto':self.set_auto, # авто
+					   'organization': self.data_executor[1], # исполнитель
+					   'inn': self.data_executor[4], # инн исполнителя
+					   'address': self.data_executor[3], # адрес исполнителя
+					   'pc': self.data_executor[5], # рс исполнителя
+					   'bik': self.data_executor[6],# бик исполнителя
+					   'fio': self.data_executor[2], # фио исполнителя
 
-				   'organization': self.data_executor[1], # исполнитель
-				   'inn': self.data_executor[4], # инн исполнителя
-				   'address': self.data_executor[3], # адрес исполнителя
-				   'pc': self.data_executor[5], # рс исполнителя
-				   'bik': self.data_executor[6],# бик исполнителя
-				   'fio': self.data_executor[2], # фио исполнителя
+					   'customer': self.data_customer[1],  # заказчик
+					   'inn_customer': self.data_customer[4],  # инн заказчика
+					   'address_customer': self.data_customer[3],  # адрес заказчика
+					   'pc_customer': self.data_customer[5],  # рс заказчика
+					   'name_bank_customer': self.data_customer[6],# название банка заказчика
+					   'bik_customer': self.data_customer[7],  # бик заказчика
+					   'fio_customer': self.data_customer[2],  # фио заказчика
+					   }
 
-				   'customer': self.data_customer[1],  # заказчик
-				   'inn_customer': self.data_customer[4],  # инн заказчика
-				   'address_customer': self.data_customer[3],  # адрес заказчика
-				   'pc_customer': self.data_customer[5],  # рс заказчика
-				   'name_bank_customer': self.data_customer[6],# название банка заказчика
-				   'bik_customer': self.data_customer[1],  # бик заказчика
-				   'fio_customer': self.data_customer[2],  # фио заказчика
-				   }
+			doc.render(context)
+			doc.save(f'{name_save}/Договор № {self.lineEdit.text()}.docx')
 
-		doc.render(context)
-		doc.save(f'{name_save}/Договор № {self.lineEdit.text()}.docx')
+			msBox = QMessageBox()
+			msBox.setText('Договор сформирован.')
+			msBox.setWindowTitle('Уведомление!')  # Замените 'Название окна' на ваше желаемое название
+			msBox.setWindowIcon(QIcon('res/icon.png'))
+			msBox.exec()
 
-		msBox= QMessageBox()
-		msBox.setText('Договор сформирован.')
-		msBox.exec()
-
-		self.clear_text()
+			self.clear_text()
+		except:
+			msBox = QMessageBox()
+			msBox.setText('Заполните все поля!')
+			msBox.setWindowTitle('Ошибка!')  # Замените 'Название окна' на ваше желаемое название
+			msBox.setWindowIcon(QIcon('res/icon.png'))
+			msBox.exec()
 
 	def clear_text(self):
 
