@@ -20,7 +20,7 @@ class DB:
 			fio_customer TEXT,
 			address_customer TEXT,
 			inn_customer INTEGER,
-			rc_customer INTEGER,
+			rc_customer TEXT,
 			name_bank_customer TEXT,
 			bik_customer INTEGER)
 			""")
@@ -40,7 +40,7 @@ class DB:
 			fio_executor TEXT,
 			address_executor TEXT,
 			inn_executor INTEGER,
-			rc_executor INTEGER,
+			rc_executor TEXT,
 			bik_executor INTEGER)
 			""")
 		self.conn.commit()

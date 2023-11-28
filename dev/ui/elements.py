@@ -49,7 +49,8 @@ class GenAuto(QtWidgets.QWidget):
 "}")
 		self.horizontalLayout.addWidget(self.lineEdit_3)
 		self.lineEdit_4 = QtWidgets.QLineEdit(self)
-		self.lineEdit_4.setMinimumSize(QtCore.QSize(250, 0))
+		self.lineEdit_4.setMinimumSize(QtCore.QSize(180, 0))
+		self.lineEdit_4.setMaximumSize(QtCore.QSize(180, 30))
 		self.lineEdit_4.setFont(font)
 		self.lineEdit_4.setObjectName("lineEdit_4")
 		self.lineEdit_4.setStyleSheet("QLineEdit{\n"
@@ -57,6 +58,14 @@ class GenAuto(QtWidgets.QWidget):
 "    border: 1px solid rgb(122, 122, 122);\n"
 "}")
 		self.horizontalLayout.addWidget(self.lineEdit_4)
+		self.lineEdit_5 = QtWidgets.QLineEdit(self)
+		self.lineEdit_5.setFont(font)
+		self.lineEdit_5.setObjectName("lineEdit_5")
+		self.lineEdit_5.setStyleSheet("QLineEdit{\n"
+"    border-radius: 5px;\n"
+"    border: 1px solid rgb(122, 122, 122);\n"
+"}")
+		self.horizontalLayout.addWidget(self.lineEdit_5)
 		self.verticalLayout.addLayout(self.horizontalLayout)
 
 class TablePrint(QtWidgets.QWidget):
