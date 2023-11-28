@@ -217,6 +217,7 @@ class App(QMainWindow, engine.Ui_widget):
 											 self.customers_addui.lineEdit_7.text(),
 											 self.customers_addui.lineEdit_6.text()),
 					 self.update_table_customers(), self.customers_add.close()))
+
 	def open_customers_update(self):
 		self.customers_add = QMainWindow()
 		self.customers_addui = customers_add.Ui_Form()
@@ -267,7 +268,11 @@ class App(QMainWindow, engine.Ui_widget):
 	def data_auto(self):
 		str_auto = ""
 		for a, i in enumerate(self.list_auto):
-			str_auto += "\t" + str(a+1) + ". " + i.lineEdit_1.text() + " | " + i.lineEdit_2.text() + " | " + i.lineEdit_3.text() + " | " + i.lineEdit_4.text() + " |\n"
+			if i.lineEdit_5.text() == "":
+				str_auto += "\t" + str(a+1) + ". " + i.lineEdit_1.text() + " | " + i.lineEdit_2.text() + " | " + i.lineEdit_3.text() + " | " + i.lineEdit_4.text() + " |\n"
+			else:
+				str_auto += "\t" + str(a+1) + ". " + i.lineEdit_1.text() + " | " + i.lineEdit_2.text() + " | " + i.lineEdit_3.text() + " | " + i.lineEdit_4.text() + " | " + i.lineEdit_5.text() + " |\n"
+
 		self.set_auto = str_auto
 
 	def del_auto(self):
