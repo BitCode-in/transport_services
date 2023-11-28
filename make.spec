@@ -32,7 +32,7 @@ exe = EXE(
     a.scripts,
     [],
     exclude_binaries=True,
-    name='main',
+    name='Зерновой Трейдер',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
