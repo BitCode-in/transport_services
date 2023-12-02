@@ -89,7 +89,7 @@ class DB:
 						rc_customer, name_bank_customer, bik_customer):
 		self.c.execute(f"""UPDATE customer 
 						SET organization='{organization}', fio_customer='{fio_customer}', address_customer='{address_customer}',
-						inn_customer={inn_customer}, rc_customer={rc_customer}, name_bank_customer='{name_bank_customer}',
+						inn_customer={inn_customer}, rc_customer='{rc_customer}', name_bank_customer='{name_bank_customer}',
 						bik_customer={bik_customer}
 						WHERE id_customer={id_customer}""")
 		self.conn.commit()
@@ -99,7 +99,7 @@ class DB:
 						rc_executor, bik_executor):
 		self.c.execute(f"""UPDATE executor 
 						SET organization='{organization}', fio_executor='{fio_executor}', address_executor='{address_executor}',
-						inn_executor={inn_executor}, rc_executor={rc_executor}, bik_executor={bik_executor}
+						inn_executor={inn_executor}, rc_executor='{rc_executor}', bik_executor={bik_executor}
 						WHERE id_executor={id_executor}""")
 		self.conn.commit()
 
