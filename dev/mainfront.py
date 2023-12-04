@@ -4,6 +4,7 @@ from ui import executor_add # маленькие окна Исполнитель
 from ui import customers_add # маленькие окна Зазазчик
 from ui import executor # таблица с исполнителями
 from ui import engine # основное окно
+from ui import setting
 from ui.elements import GenAuto, TablePrint, CustomPushBtn
 
 from docxtpl import DocxTemplate
@@ -12,6 +13,8 @@ from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog, QMessageBox
 from datetime import date
 
+import pandas as pd
+from numpy import array
 
 
 class App(QMainWindow, engine.Ui_widget):
@@ -38,6 +41,9 @@ class App(QMainWindow, engine.Ui_widget):
 		self.pushButton_3.clicked.connect(self.del_auto)
 		self.pushButton_4.clicked.connect(self.open_executor)
 		self.pushButton_5.clicked.connect(self.open_customers)
+		self.pushButton_6.clicked.connect(self.open_settings)
+		self.pushButton_7.clicked.connect(self.import_excel_to_auto)
+		self.pushButton_8.clicked.connect(self.clear_text)
 		self.lineEdit_6.setReadOnly(True)
 		self.lineEdit_7.setReadOnly(True)
 		self.font = QtGui.QFont()
@@ -46,6 +52,7 @@ class App(QMainWindow, engine.Ui_widget):
 		self.customer_now = None
 		self.db = mainback.DB()
 		self.set_auto = None
+		self.name_address = None
 
 	def open_executor(self):
 		self.list_executor = {}
@@ -104,12 +111,13 @@ class App(QMainWindow, engine.Ui_widget):
 		self.executor_add.setWindowTitle('Добавить исполнителя')
 		self.executor_add.show()
 		self.executor_addui.pushButton.clicked.connect(lambda: (self.db.insert_executor(self.executor_addui.lineEdit.text(),
+																			   self.executor_addui.lineEdit_7.text(),
 																			   self.executor_addui.lineEdit_2.text(),
 																			   self.executor_addui.lineEdit_3.text(),
 																			   self.executor_addui.lineEdit_4.text(),
 																			   self.executor_addui.lineEdit_5.text(),
 																			   self.executor_addui.lineEdit_6.text()),
-																self.update_table_executor(),self.executor_add.close())
+																self.update_table_executor(), self.executor_add.close())
 													   )
 
 	def open_executor_update(self):
@@ -122,14 +130,17 @@ class App(QMainWindow, engine.Ui_widget):
 		id = self.list_executor[num][0]
 		executor_temp = self.db.search_executor_id(id)
 		self.executor_addui.lineEdit.setText(str(executor_temp[0][1]))
-		self.executor_addui.lineEdit_2.setText(str(executor_temp[0][2]))
-		self.executor_addui.lineEdit_3.setText(str(executor_temp[0][3]))
-		self.executor_addui.lineEdit_4.setText(str(executor_temp[0][4]))
-		self.executor_addui.lineEdit_5.setText(str(executor_temp[0][5]))
-		self.executor_addui.lineEdit_6.setText(str(executor_temp[0][6]))
+		self.executor_addui.lineEdit_7.setText(str(executor_temp[0][2]))
+		self.executor_addui.lineEdit_2.setText(str(executor_temp[0][3]))
+		self.executor_addui.lineEdit_3.setText(str(executor_temp[0][4]))
+		self.executor_addui.lineEdit_4.setText(str(executor_temp[0][5]))
+		self.executor_addui.lineEdit_5.setText(str(executor_temp[0][6]))
+		self.executor_addui.lineEdit_6.setText(str(executor_temp[0][7]))
+
 		self.executor_add.show()
 		self.executor_addui.pushButton.clicked.connect(lambda: (self.db.update_executor(id,
 																			   self.executor_addui.lineEdit.text(),
+																			   self.executor_addui.lineEdit_7.text(),
 																			   self.executor_addui.lineEdit_2.text(),
 																			   self.executor_addui.lineEdit_3.text(),
 																			   self.executor_addui.lineEdit_4.text(),
@@ -148,9 +159,9 @@ class App(QMainWindow, engine.Ui_widget):
 			self.list_executor.append(i)
 			self.executorui.tableWidget.setItem(a, 0, QtWidgets.QTableWidgetItem(str(a+1)))
 			self.executorui.tableWidget.setItem(a, 1, QtWidgets.QTableWidgetItem(str(i[1])))
-			self.executorui.tableWidget.setItem(a, 2, QtWidgets.QTableWidgetItem(str(i[2])))
-			self.executorui.tableWidget.setItem(a, 3, QtWidgets.QTableWidgetItem(str(i[3])))
-			self.executorui.tableWidget.setCellWidget(a, 4, CustomPushBtn(self.take_executor, i[0]))
+			self.executorui.tableWidget.setItem(a, 2, QtWidgets.QTableWidgetItem(str(i[3])))
+			self.executorui.tableWidget.setItem(a, 3, QtWidgets.QTableWidgetItem(str(i[4])))
+			self.executorui.tableWidget.setCellWidget(a, 5, CustomPushBtn(self.take_executor, i[0]))
 
 	def search_executor(self):
 		self.list_executor = []
@@ -288,6 +299,61 @@ class App(QMainWindow, engine.Ui_widget):
 		self.tempwidget.setTabOrder(self.lineEdit_4, self.lineEdit_5)
 		self.tempwidget.setTabOrder(self.lineEdit_5, self.pushButton)
 
+	def open_settings(self):
+		self.setting = QMainWindow()
+		self.settingui = setting.Ui_Form()
+		self.settingui.setupUi(self.setting)
+		self.setting.setWindowIcon(QtGui.QIcon('res/icon.png'))
+		self.setting.setWindowTitle('Настройки')
+		self.setting.show()
+		address = self.db.view_save_address()
+		self.settingui.lineEdit.setText(str(address[0][1]))
+		self.name_address = self.settingui.pushButton_2.clicked.connect(self.name_save)
+
+		#
+		# self.settingui.pushButton_2.clicked.connect(self.name_save)
+		# self.settingui.pushButton.clicked.connect(lambda : self.db.insert_save_address(self.lineEdit.text()))
+		# self.address = self.db.view_save_address()
+		# self.settingui.lineEdit.setText(self.address.)
+		#
+		# print(self.address[0])
+
+
+	def name_save(self):
+		address = QFileDialog.getExistingDirectory()
+		return address
+
+	def ins_or_update(self):
+		address = self.db.view_save_address()
+		if address[0][1] == " ":
+			self.settingui.pushButton.clicked.connect(self.db.insert_save_address(self.name_address))
+		else:
+			self.settingui.pushButton.clicked.connect(self.db.update_save_address(self.settingui.lineEdit.text))
+
+
+	def view_address(self):
+		self.db.view_save_address()
+
+		# print(self.db.view_save_address())
+		# address_save = self.db.view_save_address()
+		# print(address_save[0][0])
+		# if self.db.view_save_address() != "":
+		# 	self.settingui.lineEdit.setText(address_save[0])
+		# else:
+		# 	self.settingui.lineEdit.setText("Здесь будет путь для сохранения.")
+
+	def import_excel_to_auto(self):
+		df = array(pd.read_clipboard(header=None))
+		print(df)
+		# for i in df:
+		# 	temp_genauto = GenAuto(settext=str(len(self.list_auto) + 1))
+		# 	temp_genauto.lineEdit_1.setText(i[0])
+		# 	temp_genauto.lineEdit_2.setText(i[1])
+		# 	temp_genauto.lineEdit_3.setText(i[2])
+		# 	temp_genauto.lineEdit_4.setText(i[3])
+		# 	self.list_auto.append(temp_genauto)
+		# 	self.verticalLayout_3.addWidget(temp_genauto)
+
 # вставка в ворд
 	def word_create(self):
 		try:
@@ -326,11 +392,12 @@ class App(QMainWindow, engine.Ui_widget):
 					   'auto':self.set_auto, # авто
 
 					   'organization': self.data_executor[1], # исполнитель
-					   'inn': self.data_executor[4], # инн исполнителя
-					   'address': self.data_executor[3], # адрес исполнителя
-					   'pc': self.data_executor[5], # рс исполнителя
-					   'bik': self.data_executor[6],# бик исполнителя
-					   'fio': self.data_executor[2], # фио исполнителя
+					   'inn': self.data_executor[5], # инн исполнителя
+					   'address': self.data_executor[4], # адрес исполнителя
+					   'pc': self.data_executor[6], # рс исполнителя
+					   'bik': self.data_executor[7],# бик исполнителя
+					   'fio': self.data_executor[3], # фио исполнителя
+					   'fio': self.data_executor[2],  # фио исполнителя
 
 					   'customer': self.data_customer[1],  # заказчик
 					   'inn_customer': self.data_customer[4],  # инн заказчика
@@ -350,7 +417,6 @@ class App(QMainWindow, engine.Ui_widget):
 			msBox.setWindowIcon(QIcon('res/icon.png'))
 			msBox.exec()
 
-			self.clear_text()
 		except:
 			msBox = QMessageBox()
 			msBox.setText('Заполните все поля!')
