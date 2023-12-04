@@ -73,9 +73,9 @@ class DB:
 		self.conn.commit()
 
 	# добавление заказчика
-	def insert_customer(self, organization,job_title_customer, fio_customer, address_customer, inn_customer,
+	def insert_customer(self, organization, job_title_customer, fio_customer, address_customer, inn_customer,
 						rc_customer, name_bank_customer, bik_customer):
-		self.c.execute("""INSERT INTO customer (organization,jon_title_customer, fio_customer, address_customer, inn_customer,
+		self.c.execute("""INSERT INTO customer (organization,job_title_customer, fio_customer, address_customer, inn_customer,
 						rc_customer, name_bank_customer, bik_customer)
 						  VALUES (?, ?, ?, ?, ?, ?, ?, ?)""", (organization, job_title_customer, fio_customer, address_customer, inn_customer,
 						rc_customer, name_bank_customer, bik_customer))
@@ -84,7 +84,7 @@ class DB:
 	# добавление исполнителя
 	def insert_executor(self, organization, fio_executor, address_executor, inn_executor, rc_executor, bik_executor):
 		self.c.execute("""INSERT INTO executor (organization, fio_executor, address_executor, inn_executor, rc_executor, bik_executor)
-						  VALUES (?,?, ?, ?, ?, ?, ?)""",(organization, fio_executor, address_executor, inn_executor, rc_executor, bik_executor))
+						  VALUES (?,?, ?, ?, ?, ?)""",(organization, fio_executor, address_executor, inn_executor, rc_executor, bik_executor))
 		self.conn.commit()
 
 	# добавление авто
@@ -137,7 +137,7 @@ class DB:
 
 	# поиск заказчика
 	def search_customer(self, name_search):
-		self.c.execute(f"""SELECT * FROM customer WHERE organization LIKE '%{name_search}%' 
+		self.c.execute(f"""SELECT id_customer,organization,fio_customer,inn_customer FROM customer WHERE organization LIKE '%{name_search}%' 
 		or fio_customer LIKE '%{name_search}%' or inn_customer LIKE '%{name_search}%'""")
 		return self.c.fetchall()
 
@@ -148,7 +148,7 @@ class DB:
 
 	# поиск исполнителя
 	def search_executor(self, name_search):
-		self.c.execute(f"""SELECT *
+		self.c.execute(f"""SELECT id_executor,organization,fio_executor,inn_executor
 		FROM executor WHERE organization LIKE '%{name_search}%' 
 		or fio_executor LIKE '%{name_search}%' or inn_executor LIKE '%{name_search}%'""")
 		return self.c.fetchall()
@@ -166,7 +166,7 @@ class DB:
 
 	# вывод исполнителя
 	def view_executor(self):
-		self.c.execute(f"SELECT id_executor,organization,jon_title_executor,fio_executor,inn_executor FROM executor")
+		self.c.execute(f"SELECT id_executor,organization,fio_executor,inn_executor FROM executor")
 		return self.c.fetchall()
 		#self.conn.commit()
 

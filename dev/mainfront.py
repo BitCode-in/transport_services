@@ -111,7 +111,6 @@ class App(QMainWindow, engine.Ui_widget):
 		self.executor_add.setWindowTitle('Добавить исполнителя')
 		self.executor_add.show()
 		self.executor_addui.pushButton.clicked.connect(lambda: (self.db.insert_executor(self.executor_addui.lineEdit.text(),
-																			   self.executor_addui.lineEdit_7.text(),
 																			   self.executor_addui.lineEdit_2.text(),
 																			   self.executor_addui.lineEdit_3.text(),
 																			   self.executor_addui.lineEdit_4.text(),
@@ -130,7 +129,6 @@ class App(QMainWindow, engine.Ui_widget):
 		id = self.list_executor[num][0]
 		executor_temp = self.db.search_executor_id(id)
 		self.executor_addui.lineEdit.setText(str(executor_temp[0][1]))
-		self.executor_addui.lineEdit_7.setText(str(executor_temp[0][2]))
 		self.executor_addui.lineEdit_2.setText(str(executor_temp[0][3]))
 		self.executor_addui.lineEdit_3.setText(str(executor_temp[0][4]))
 		self.executor_addui.lineEdit_4.setText(str(executor_temp[0][5]))
@@ -140,7 +138,6 @@ class App(QMainWindow, engine.Ui_widget):
 		self.executor_add.show()
 		self.executor_addui.pushButton.clicked.connect(lambda: (self.db.update_executor(id,
 																			   self.executor_addui.lineEdit.text(),
-																			   self.executor_addui.lineEdit_7.text(),
 																			   self.executor_addui.lineEdit_2.text(),
 																			   self.executor_addui.lineEdit_3.text(),
 																			   self.executor_addui.lineEdit_4.text(),
@@ -159,9 +156,9 @@ class App(QMainWindow, engine.Ui_widget):
 			self.list_executor.append(i)
 			self.executorui.tableWidget.setItem(a, 0, QtWidgets.QTableWidgetItem(str(a+1)))
 			self.executorui.tableWidget.setItem(a, 1, QtWidgets.QTableWidgetItem(str(i[1])))
-			self.executorui.tableWidget.setItem(a, 2, QtWidgets.QTableWidgetItem(str(i[3])))
-			self.executorui.tableWidget.setItem(a, 3, QtWidgets.QTableWidgetItem(str(i[4])))
-			self.executorui.tableWidget.setCellWidget(a, 5, CustomPushBtn(self.take_executor, i[0]))
+			self.executorui.tableWidget.setItem(a, 2, QtWidgets.QTableWidgetItem(str(i[2])))
+			self.executorui.tableWidget.setItem(a, 3, QtWidgets.QTableWidgetItem(str(i[3])))
+			self.executorui.tableWidget.setCellWidget(a, 4, CustomPushBtn(self.take_executor, i[0]))
 
 	def search_executor(self):
 		self.list_executor = []
@@ -173,7 +170,7 @@ class App(QMainWindow, engine.Ui_widget):
 			self.executorui.tableWidget.setItem(a, 0, QtWidgets.QTableWidgetItem(str(a+1)))
 			self.executorui.tableWidget.setItem(a, 1, QtWidgets.QTableWidgetItem(str(i[1])))
 			self.executorui.tableWidget.setItem(a, 2, QtWidgets.QTableWidgetItem(str(i[2])))
-			self.executorui.tableWidget.setItem(a, 3, QtWidgets.QTableWidgetItem(str(i[4])))
+			self.executorui.tableWidget.setItem(a, 3, QtWidgets.QTableWidgetItem(str(i[3])))
 			self.executorui.tableWidget.setCellWidget(a, 4, CustomPushBtn(self.take_executor, i[0]))
 
 	def search_customers(self):
@@ -186,7 +183,7 @@ class App(QMainWindow, engine.Ui_widget):
 			self.customersui.tableWidget.setItem(a, 0, QtWidgets.QTableWidgetItem(str(a+1)))
 			self.customersui.tableWidget.setItem(a, 1, QtWidgets.QTableWidgetItem(str(i[1])))
 			self.customersui.tableWidget.setItem(a, 2, QtWidgets.QTableWidgetItem(str(i[2])))
-			self.customersui.tableWidget.setItem(a, 3, QtWidgets.QTableWidgetItem(str(i[4])))
+			self.customersui.tableWidget.setItem(a, 3, QtWidgets.QTableWidgetItem(str(i[3])))
 			self.customersui.tableWidget.setCellWidget(a, 4, CustomPushBtn(self.take_customers, i[0]))
 
 	def open_customers(self):
@@ -221,13 +218,15 @@ class App(QMainWindow, engine.Ui_widget):
 		self.customers_add.show()
 		self.customers_addui.pushButton.clicked.connect(
 			lambda: (self.db.insert_customer(self.customers_addui.lineEdit.text(),
+											 self.customers_addui.lineEdit_8.text(),
 											 self.customers_addui.lineEdit_2.text(),
 											 self.customers_addui.lineEdit_3.text(),
 											 self.customers_addui.lineEdit_4.text(),
 											 self.customers_addui.lineEdit_5.text(),
 											 self.customers_addui.lineEdit_7.text(),
 											 self.customers_addui.lineEdit_6.text()),
-					 self.update_table_customers(), self.customers_add.close()))
+					 self.update_table_customers(),
+					 self.customers_add.close()))
 
 	def open_customers_update(self):
 		self.customers_add = QMainWindow()
@@ -239,16 +238,18 @@ class App(QMainWindow, engine.Ui_widget):
 		id = self.list_customers[num][0]
 		customers_temp = self.db.search_customer_id(id)
 		self.customers_addui.lineEdit.setText(str(customers_temp[0][1]))
-		self.customers_addui.lineEdit_2.setText(str(customers_temp[0][2]))
-		self.customers_addui.lineEdit_3.setText(str(customers_temp[0][3]))
-		self.customers_addui.lineEdit_4.setText(str(customers_temp[0][4]))
-		self.customers_addui.lineEdit_5.setText(str(customers_temp[0][5]))
-		self.customers_addui.lineEdit_7.setText(str(customers_temp[0][6]))
-		self.customers_addui.lineEdit_6.setText(str(customers_temp[0][7]))
+		self.customers_addui.lineEdit_8.setText(str(customers_temp[0][2]))
+		self.customers_addui.lineEdit_2.setText(str(customers_temp[0][3]))
+		self.customers_addui.lineEdit_3.setText(str(customers_temp[0][4]))
+		self.customers_addui.lineEdit_4.setText(str(customers_temp[0][5]))
+		self.customers_addui.lineEdit_5.setText(str(customers_temp[0][6]))
+		self.customers_addui.lineEdit_7.setText(str(customers_temp[0][7]))
+		self.customers_addui.lineEdit_6.setText(str(customers_temp[0][8]))
 		self.customers_add.show()
 		self.customers_addui.pushButton.clicked.connect(
 			lambda: (self.db.update_customer(id,
 																						self.customers_addui.lineEdit.text(),
+											 											self.customers_addui.lineEdit_8.text(),
 																						self.customers_addui.lineEdit_2.text(),
 																						self.customers_addui.lineEdit_3.text(),
 																						self.customers_addui.lineEdit_4.text(),
@@ -384,24 +385,24 @@ class App(QMainWindow, engine.Ui_widget):
 					   'auto':self.set_auto, # авто
 
 					   'organization': self.data_executor[1], # исполнитель
-					   'inn': self.data_executor[5], # инн исполнителя
-					   'address': self.data_executor[4], # адрес исполнителя
-					   'pc': self.data_executor[6], # рс исполнителя
-					   'bik': self.data_executor[7],# бик исполнителя
-					   'fio': self.data_executor[3], # фио исполнителя
+					   'inn': self.data_executor[4], # инн исполнителя
+					   'address': self.data_executor[3], # адрес исполнителя
+					   'pc': self.data_executor[5], # рс исполнителя
+					   'bik': self.data_executor[6],# бик исполнителя
 					   'fio': self.data_executor[2],  # фио исполнителя
 
 					   'customer': self.data_customer[1],  # заказчик
-					   'inn_customer': self.data_customer[4],  # инн заказчика
-					   'address_customer': self.data_customer[3],  # адрес заказчика
-					   'pc_customer': self.data_customer[5],  # рс заказчика
-					   'name_bank_customer': self.data_customer[6],# название банка заказчика
-					   'bik_customer': self.data_customer[7],  # бик заказчика
-					   'fio_customer': self.data_customer[2],  # фио заказчика
+					   'job_title_customer': self.data_customer[2],
+					   'inn_customer': self.data_customer[5],  # инн заказчика
+					   'address_customer': self.data_customer[4],  # адрес заказчика
+					   'pc_customer': self.data_customer[6],  # рс заказчика
+					   'name_bank_customer': self.data_customer[7],# название банка заказчика
+					   'bik_customer': self.data_customer[8],  # бик заказчика
+					   'fio_customer': self.data_customer[3],  # фио заказчика
 					   }
 
 			doc.render(context)
-			doc.save(f'{name_save}/Договор № {self.lineEdit.text()}.docx')
+			doc.save(f'{self.name_address}/Договор № {self.lineEdit.text()}.docx')
 
 			msBox = QMessageBox()
 			msBox.setText('Договор сформирован.')
