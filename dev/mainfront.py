@@ -1,4 +1,4 @@
-import sys, mainback
+import sys, mainback, os,  pyperclip
 from ui import customers # таблица с заказчиками
 from ui import executor_add # маленькие окна Исполнитель
 from ui import customers_add # маленькие окна Зазазчик
@@ -53,6 +53,7 @@ class App(QMainWindow, engine.Ui_widget):
 		self.db = mainback.DB()
 		self.set_auto = None
 		self.name_address = None
+		self.check_correct_address(os.getcwd().replace('\\', "/"))
 
 	def open_executor(self):
 		self.list_executor = {}
@@ -129,11 +130,11 @@ class App(QMainWindow, engine.Ui_widget):
 		id = self.list_executor[num][0]
 		executor_temp = self.db.search_executor_id(id)
 		self.executor_addui.lineEdit.setText(str(executor_temp[0][1]))
-		self.executor_addui.lineEdit_2.setText(str(executor_temp[0][3]))
-		self.executor_addui.lineEdit_3.setText(str(executor_temp[0][4]))
-		self.executor_addui.lineEdit_4.setText(str(executor_temp[0][5]))
-		self.executor_addui.lineEdit_5.setText(str(executor_temp[0][6]))
-		self.executor_addui.lineEdit_6.setText(str(executor_temp[0][7]))
+		self.executor_addui.lineEdit_2.setText(str(executor_temp[0][2]))
+		self.executor_addui.lineEdit_3.setText(str(executor_temp[0][3]))
+		self.executor_addui.lineEdit_4.setText(str(executor_temp[0][4]))
+		self.executor_addui.lineEdit_5.setText(str(executor_temp[0][5]))
+		self.executor_addui.lineEdit_6.setText(str(executor_temp[0][6]))
 
 		self.executor_add.show()
 		self.executor_addui.pushButton.clicked.connect(lambda: (self.db.update_executor(id,
@@ -307,21 +308,27 @@ class App(QMainWindow, engine.Ui_widget):
 		self.setting.setWindowIcon(QtGui.QIcon('res/icon.png'))
 		self.setting.setWindowTitle('Настройки')
 		self.setting.show()
+		self.settingui.lineEdit.setReadOnly(True)
 		address = self.db.view_save_address()
 		self.settingui.lineEdit.setText(str(address[0][1]))
-		self.name_address = self.settingui.pushButton_2.clicked.connect(self.name_save)
+		self.settingui.pushButton_2.clicked.connect(self.change_name_save)
+		self.settingui.pushButton.clicked.connect(lambda: self.name_save())
 
+	def change_name_save(self):
+		self.settingui.lineEdit.setText(str(QFileDialog.getExistingDirectory()))
 
 	def name_save(self):
-		address = QFileDialog.getExistingDirectory()
-		return address
+		self.name_address = self.settingui.lineEdit.text()
+		self.db.update_save_address(self.name_address)
+		self.setting.close()
 
-	def ins_or_update(self):
+	def check_correct_address(self, str_path):
 		address = self.db.view_save_address()
-		if address[0][1] == " ":
-			self.settingui.pushButton.clicked.connect(self.db.insert_save_address(self.name_address))
-		else:
-			self.settingui.pushButton.clicked.connect(self.db.update_save_address(self.settingui.lineEdit.text))
+		try:
+			self.name_address = address[0][1]
+		except:
+			self.db.insert_save_address(str_path)
+			
 
 
 	def view_address(self):
@@ -336,18 +343,31 @@ class App(QMainWindow, engine.Ui_widget):
 		# 	self.settingui.lineEdit.setText("Здесь будет путь для сохранения.")
 
 	def import_excel_to_auto(self):
-		df = array(pd.read_clipboard(header=None))
-		print(df)
-		# for i in df:
-		# 	temp_genauto = GenAuto(settext=str(len(self.list_auto) + 1))
-		# 	temp_genauto.lineEdit_1.setText(i[0])
-		# 	temp_genauto.lineEdit_2.setText(i[1])
-		# 	temp_genauto.lineEdit_3.setText(i[2])
-		# 	temp_genauto.lineEdit_4.setText(i[3])
-		# 	self.list_auto.append(temp_genauto)
-		# 	self.verticalLayout_3.addWidget(temp_genauto)
+		try:
+			clipboard_data = pyperclip.paste()
+			df = []
+			clipboard_data = clipboard_data.replace("\r", "").split('\n')[:-1]
+			for i in clipboard_data:
+				df.append(i.split('\t'))
+			for i in df:
+				print(i)
+				temp_genauto = GenAuto(settext=str(len(self.list_auto) + 1))
+				temp_genauto.lineEdit_1.setText(i[0])
+				temp_genauto.lineEdit_2.setText(i[1])
+				temp_genauto.lineEdit_3.setText(i[2])
+				temp_genauto.lineEdit_4.setText(i[3])
+				if self.list_auto[0].lineEdit_1.text() == "" and self.list_auto[0].lineEdit_2.text() == "" and self.list_auto[0].lineEdit_3.text() == "" and self.list_auto[0].lineEdit_4.text() == "":
+					self.verticalLayout_3.removeWidget(self.list_auto[-1])
+					self.list_auto.pop(-1)
+				self.list_auto.append(temp_genauto)
+				self.verticalLayout_3.addWidget(temp_genauto)
+		except:
+			msBox = QMessageBox()
+			msBox.setText('Вам нужно выбрать 4 столбца!')
+			msBox.setWindowTitle('Ошибка!')  # Замените 'Название окна' на ваше желаемое название
+			msBox.setWindowIcon(QIcon('res/icon.png'))
+			msBox.exec()
 
-# вставка в ворд
 	def word_create(self):
 		try:
 			dict_month = {'01': 'января',
@@ -369,8 +389,6 @@ class App(QMainWindow, engine.Ui_widget):
 			day = date.today().day
 
 			full_year = str(day) + ' ' + dict_month[f'{month}'] + ' ' + str(year) + ' г.'
-
-			name_save = QFileDialog.getExistingDirectory()
 
 			year = date.today()
 			doc = DocxTemplate("./docx/agreement.docx")

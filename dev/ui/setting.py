@@ -52,15 +52,21 @@ class Ui_Form(object):
         self.label_9.setScaledContents(True)
         self.label_9.setObjectName("label_9")
         self.pushButton_2 = QtWidgets.QPushButton(Form)
-        self.pushButton_2.setGeometry(QtCore.QRect(520, 0, 21, 32))
+        self.pushButton_2.setGeometry(QtCore.QRect(517, 6, 30, 30))
+        self.pushButton_2.setMinimumSize(QtCore.QSize(30, 30))
+        self.pushButton_2.setMaximumSize(QtCore.QSize(30, 30))
         font = QtGui.QFont()
         font.setFamily("Arial")
         self.pushButton_2.setFont(font)
         self.pushButton_2.setStyleSheet("QPushButton {\n"
-"    background: rgb(0, 255, 127);\n"
-"    border: 1px solid rgb(122, 122, 122);\n"
-"    border-radius: 5px;  /* Установите радиус закругления, например, 10px */\n"
+"    background: none;\n"
+"    border: none;\n"
 "}")
+        self.pushButton_2.setText("")
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap("ui_template\\../res/free-icon-tractor-2194813.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.pushButton_2.setIcon(icon)
+        self.pushButton_2.setIconSize(QtCore.QSize(25, 25))
         self.pushButton_2.setObjectName("pushButton_2")
 
         self.retranslateUi(Form)
@@ -71,4 +77,3 @@ class Ui_Form(object):
         Form.setWindowTitle(_translate("Form", "Form"))
         self.label.setText(_translate("Form", "Путь сохранения:"))
         self.pushButton.setText(_translate("Form", "Сохранить"))
-        self.pushButton_2.setText(_translate("Form", "Сохранить"))

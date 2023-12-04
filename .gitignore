@@ -3,3 +3,4 @@ build/
 dist/
 .idea/
 def/__pychache__/
+def/ui/__pychache__/
