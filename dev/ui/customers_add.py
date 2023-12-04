@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'customers_add.ui'
+# Form implementation generated from reading ui file 'ui_template\customers_add.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.9
 #
@@ -14,9 +14,9 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
-        Form.resize(703, 304)
+        Form.resize(703, 369)
         self.pushButton = QtWidgets.QPushButton(Form)
-        self.pushButton.setGeometry(QtCore.QRect(490, 260, 201, 32))
+        self.pushButton.setGeometry(QtCore.QRect(490, 320, 201, 32))
         font = QtGui.QFont()
         font.setFamily("Arial")
         self.pushButton.setFont(font)
@@ -27,7 +27,10 @@ class Ui_Form(object):
 "}")
         self.pushButton.setObjectName("pushButton")
         self.verticalWidget = QtWidgets.QWidget(Form)
-        self.verticalWidget.setGeometry(QtCore.QRect(10, 10, 681, 241))
+        self.verticalWidget.setGeometry(QtCore.QRect(10, 10, 681, 301))
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        self.verticalWidget.setFont(font)
         self.verticalWidget.setObjectName("verticalWidget")
         self.verticalLayout_4 = QtWidgets.QVBoxLayout(self.verticalWidget)
         self.verticalLayout_4.setContentsMargins(0, 0, 0, 0)
@@ -52,6 +55,26 @@ class Ui_Form(object):
         self.lineEdit.setObjectName("lineEdit")
         self.horizontalLayout_4.addWidget(self.lineEdit)
         self.verticalLayout_4.addLayout(self.horizontalLayout_4)
+        self.horizontalLayout_11 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_11.setObjectName("horizontalLayout_11")
+        self.label_8 = QtWidgets.QLabel(self.verticalWidget)
+        self.label_8.setMinimumSize(QtCore.QSize(300, 0))
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        self.label_8.setFont(font)
+        self.label_8.setObjectName("label_8")
+        self.horizontalLayout_11.addWidget(self.label_8)
+        self.lineEdit_8 = QtWidgets.QLineEdit(self.verticalWidget)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        self.lineEdit_8.setFont(font)
+        self.lineEdit_8.setStyleSheet("QLineEdit{\n"
+"    border-radius: 5px;\n"
+"    border: 1px solid rgb(122, 122, 122);\n"
+"}")
+        self.lineEdit_8.setObjectName("lineEdit_8")
+        self.horizontalLayout_11.addWidget(self.lineEdit_8)
+        self.verticalLayout_4.addLayout(self.horizontalLayout_11)
         self.horizontalLayout_5 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_5.setObjectName("horizontalLayout_5")
         self.label_2 = QtWidgets.QLabel(self.verticalWidget)
@@ -181,6 +204,7 @@ class Ui_Form(object):
         Form.setWindowTitle(_translate("Form", "Form"))
         self.pushButton.setText(_translate("Form", "Сохранить"))
         self.label.setText(_translate("Form", "Название организации"))
+        self.label_8.setText(_translate("Form", "Должность заказчика"))
         self.label_2.setText(_translate("Form", "ФИО заказчика"))
         self.label_3.setText(_translate("Form", "Адрес"))
         self.label_4.setText(_translate("Form", "ИНН"))

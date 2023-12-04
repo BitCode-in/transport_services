@@ -124,7 +124,7 @@ class App(QMainWindow, engine.Ui_widget):
 		self.executor_add = QMainWindow()
 		self.executor_addui = executor_add.Ui_Form()
 		self.executor_addui.setupUi(self.executor_add)
-		self.executor_add.setWindowIcon(QtGui.QIcon('de/res/icon.png'))
+		self.executor_add.setWindowIcon(QtGui.QIcon('res/icon.png'))
 		self.executor_add.setWindowTitle('Изменить исполнителя')
 		num = self.executorui.tableWidget.currentRow()
 		id = self.list_executor[num][0]
@@ -195,7 +195,7 @@ class App(QMainWindow, engine.Ui_widget):
 		self.customers = QMainWindow()
 		self.customersui = customers.Ui_Form()
 		self.customersui.setupUi(self.customers)
-		self.customers.setWindowIcon(QtGui.QIcon('dev/res/icon.png'))
+		self.customers.setWindowIcon(QtGui.QIcon('res/icon.png'))
 		self.customers.setWindowTitle('Заказчики')
 		self.customers.show()
 		self.customersui.pushButton.clicked.connect(self.open_customers_add)
@@ -216,7 +216,7 @@ class App(QMainWindow, engine.Ui_widget):
 		self.customers_add = QMainWindow()
 		self.customers_addui = customers_add.Ui_Form()
 		self.customers_addui.setupUi(self.customers_add)
-		self.customers_add.setWindowIcon(QtGui.QIcon('dev/res/icon.png'))
+		self.customers_add.setWindowIcon(QtGui.QIcon('res/icon.png'))
 		self.customers_add.setWindowTitle('Добавить заказчика')
 		self.customers_add.show()
 		self.customers_addui.pushButton.clicked.connect(
@@ -233,7 +233,7 @@ class App(QMainWindow, engine.Ui_widget):
 		self.customers_add = QMainWindow()
 		self.customers_addui = customers_add.Ui_Form()
 		self.customers_addui.setupUi(self.customers_add)
-		self.customers_add.setWindowIcon(QtGui.QIcon('de/res/icon.png'))
+		self.customers_add.setWindowIcon(QtGui.QIcon('res/icon.png'))
 		self.customers_add.setWindowTitle('Изменить заказчика')
 		num = self.customersui.tableWidget.currentRow()
 		id = self.list_customers[num][0]
@@ -309,14 +309,6 @@ class App(QMainWindow, engine.Ui_widget):
 		address = self.db.view_save_address()
 		self.settingui.lineEdit.setText(str(address[0][1]))
 		self.name_address = self.settingui.pushButton_2.clicked.connect(self.name_save)
-
-		#
-		# self.settingui.pushButton_2.clicked.connect(self.name_save)
-		# self.settingui.pushButton.clicked.connect(lambda : self.db.insert_save_address(self.lineEdit.text()))
-		# self.address = self.db.view_save_address()
-		# self.settingui.lineEdit.setText(self.address.)
-		#
-		# print(self.address[0])
 
 
 	def name_save(self):
