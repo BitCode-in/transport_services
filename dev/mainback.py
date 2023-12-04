@@ -16,7 +16,8 @@ class DB:
 		self.c.execute(
 			""" CREATE TABLE IF NOT EXISTS customer ( 
 			id_customer INTEGER PRIMARY KEY AUTOINCREMENT,
-			organization TEXT, 
+			organization TEXT,
+			job_title_customer TEXT, 
 			fio_customer TEXT,
 			address_customer TEXT,
 			inn_customer INTEGER,
@@ -36,8 +37,7 @@ class DB:
 		self.c.execute(
 			""" CREATE TABLE IF NOT EXISTS executor ( 
 			id_executor INTEGER PRIMARY KEY AUTOINCREMENT,
-			organization TEXT,
-			jon_title_executor TEXT, 
+			organization TEXT, 
 			fio_executor TEXT,
 			address_executor TEXT,
 			inn_executor INTEGER,
@@ -73,18 +73,18 @@ class DB:
 		self.conn.commit()
 
 	# добавление заказчика
-	def insert_customer(self, organization, fio_customer, address_customer, inn_customer,
+	def insert_customer(self, organization,job_title_customer, fio_customer, address_customer, inn_customer,
 						rc_customer, name_bank_customer, bik_customer):
-		self.c.execute("""INSERT INTO customer (organization, fio_customer, address_customer, inn_customer,
+		self.c.execute("""INSERT INTO customer (organization,jon_title_customer, fio_customer, address_customer, inn_customer,
 						rc_customer, name_bank_customer, bik_customer)
-						  VALUES (?, ?, ?, ?, ?, ?, ?)""", (organization, fio_customer, address_customer, inn_customer,
+						  VALUES (?, ?, ?, ?, ?, ?, ?, ?)""", (organization, job_title_customer, fio_customer, address_customer, inn_customer,
 						rc_customer, name_bank_customer, bik_customer))
 		self.conn.commit()
 
 	# добавление исполнителя
-	def insert_executor(self, organization, jon_title_executor, fio_executor, address_executor, inn_executor, rc_executor, bik_executor):
-		self.c.execute("""INSERT INTO executor (organization,jon_title_executor, fio_executor, address_executor, inn_executor, rc_executor, bik_executor)
-						  VALUES (?,?, ?, ?, ?, ?, ?)""",(organization, jon_title_executor, fio_executor, address_executor, inn_executor, rc_executor, bik_executor))
+	def insert_executor(self, organization, fio_executor, address_executor, inn_executor, rc_executor, bik_executor):
+		self.c.execute("""INSERT INTO executor (organization, fio_executor, address_executor, inn_executor, rc_executor, bik_executor)
+						  VALUES (?,?, ?, ?, ?, ?, ?)""",(organization, fio_executor, address_executor, inn_executor, rc_executor, bik_executor))
 		self.conn.commit()
 
 	# добавление авто
@@ -94,20 +94,20 @@ class DB:
 		self.conn.commit()
 
 	#изменить заказчика
-	def update_customer(self, id_customer, organization, fio_customer, address_customer, inn_customer,
+	def update_customer(self, id_customer, organization, job_title_customer, fio_customer, address_customer, inn_customer,
 						rc_customer, name_bank_customer, bik_customer):
 		self.c.execute(f"""UPDATE customer 
-						SET organization='{organization}', fio_customer='{fio_customer}', address_customer='{address_customer}',
+						SET organization='{organization}',jon_title_customer='{job_title_customer}' fio_customer='{fio_customer}', address_customer='{address_customer}',
 						inn_customer={inn_customer}, rc_customer='{rc_customer}', name_bank_customer='{name_bank_customer}',
 						bik_customer={bik_customer}
 						WHERE id_customer={id_customer}""")
 		self.conn.commit()
 
 	# изменить исполнителя
-	def update_executor(self, id_executor, organization,jon_title_executor, fio_executor, address_executor, inn_executor,
+	def update_executor(self, id_executor, organization, fio_executor, address_executor, inn_executor,
 						rc_executor, bik_executor):
 		self.c.execute(f"""UPDATE executor 
-						SET organization='{organization}', jon_title_executor='{jon_title_executor}', fio_executor='{fio_executor}', address_executor='{address_executor}',
+						SET organization='{organization}', fio_executor='{fio_executor}', address_executor='{address_executor}',
 						inn_executor={inn_executor}, rc_executor='{rc_executor}', bik_executor={bik_executor}
 						WHERE id_executor={id_executor}""")
 		self.conn.commit()
