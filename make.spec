@@ -3,20 +3,21 @@
 
 a = Analysis(
     ['./dev/mainfront.py'],
-    pathex=[],
+    pathex=[r"C:\Users\bitcode\YandexDisk\Work\python3.8.5\Artem_project\transport_services\dev", r"C:\Users\bitcode\YandexDisk\Work\python3.8.5\Artem_project\transport_services\dev\ui"],
     binaries=[],
     datas=[
     ('dev/res/free-icon-add-button-8371340.png', 'res'),
     ('dev/res/free-icon-avatar-8370797.png', 'res'),
     ('dev/res/free-icon-hospital-signal-8371351.png', 'res'),
     ('dev/res/free-icon-search-8371297.png', 'res'),
+    ('dev/res/free-icon-excel-732220.png', 'res'),
+    ('dev/res/free-icon-gear-10186135.png', 'res'),
+    ('dev/res/free-icon-tractor-2194813.png', 'res'),
     ('dev/res/icon.ico', 'res'),
     ('dev/res/icon.png', 'res'),
-    ('dev/res/logo.jpg', 'res'),
     ('dev/res/logo.png', 'res'),
     ('dev/res/settings.png', 'res'),
     ('dev/docx/agreement.docx', 'docx'),
-
     ],
     hiddenimports=[],
     hookspath=[],
@@ -32,7 +33,7 @@ exe = EXE(
     a.scripts,
     [],
     exclude_binaries=True,
-    name='Зерновой Трейдер',
+    name='Зерновой_Трейдер',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
@@ -53,5 +54,5 @@ coll = COLLECT(
     strip=False,
     upx=True,
     upx_exclude=[],
-    name='Зерновой Трейдер',
+    name='Зерновой_Трейдер',
 )
