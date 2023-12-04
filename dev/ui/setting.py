@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'setting.ui'
+# Form implementation generated from reading ui file 'ui_template\setting.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.9
 #
@@ -48,7 +48,7 @@ class Ui_Form(object):
         font.setFamily("Arial")
         self.label_9.setFont(font)
         self.label_9.setText("")
-        self.label_9.setPixmap(QtGui.QPixmap("../res/logo.png"))
+        self.label_9.setPixmap(QtGui.QPixmap("ui_template\\../res/logo.png"))
         self.label_9.setScaledContents(True)
         self.label_9.setObjectName("label_9")
         self.pushButton_2 = QtWidgets.QPushButton(Form)

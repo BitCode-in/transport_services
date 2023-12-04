@@ -177,7 +177,7 @@ class DB:
 
 	#добавить адресс сохранения
 	def insert_save_address(self, address_save):
-		self.c.execute(f"""INSERT INTO save (address_save) VALUES '{address_save}' """)
+		self.c.execute(f"""INSERT INTO save (address_save) VALUES ('{address_save}') """)
 		self.conn.commit()
 
 	# изменить адресс сохранения
