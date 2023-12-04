@@ -63,6 +63,14 @@ class DB:
 			""")
 		self.conn.commit()
 
+		# таблица для пути сохранения
+		self.c.execute(
+			""" CREATE TABLE IF NOT EXISTS save ( 
+			id_save INTEGER PRIMARY KEY AUTOINCREMENT,
+			address_save TEXT)
+			""")
+		self.conn.commit()
+
 	# добавление исполнителя
 	def insert_customer(self, organization, fio_customer, address_customer, inn_customer,
 						rc_customer, name_bank_customer, bik_customer):
@@ -79,12 +87,12 @@ class DB:
 		self.conn.commit()
 
 	# добавление авто
-	# def insert_auto(self, id_executor, brand_auto, num_tractor, num_trailer, fio_driver):
-	# 	self.c.execute(f"""INSERT INTO auto (id_executor, brand_auto, num_tractor, num_trailer,fio_driver)
-	# 					  VALUES ({id_executor}, {brand_auto}, {num_tractor}, {num_trailer}, {fio_driver})""")
-	# 	self.conn.commit()
+	def insert_auto(self, id_executor, brand_auto, num_tractor, num_trailer, fio_driver):
+		self.c.execute(f"""INSERT INTO auto (id_executor, brand_auto, num_tractor, num_trailer,fio_driver)
+						  VALUES ({id_executor}, '{brand_auto}', '{num_tractor}', '{num_trailer}', '{fio_driver}')""")
+		self.conn.commit()
 
-	# изменить исполнителя
+	#изменить исполнителя
 	def update_customer(self, id_customer, organization, fio_customer, address_customer, inn_customer,
 						rc_customer, name_bank_customer, bik_customer):
 		self.c.execute(f"""UPDATE customer 
@@ -104,12 +112,12 @@ class DB:
 		self.conn.commit()
 
 	# изменить авто
-	# def update_auto(self, id_auto, brand_auto, num_tractor, num_trailer, fio_driver):
-	# 	self.c.execute(f"""UPDATE auto
-	# 					SET brand_auto={brand_auto}, num_tractor={num_tractor}, num_trailer={num_trailer},
-	# 					fio_driver={fio_driver}
-	# 					WHERE id_auto={id_auto}""")
-	# 	self.conn.commit()
+	def update_auto(self, id_auto, brand_auto, num_tractor, num_trailer, fio_driver):
+		self.c.execute(f"""UPDATE auto
+						SET brand_auto='{brand_auto}', num_tractor='{num_tractor}', num_trailer='{num_trailer}',
+						fio_driver='{fio_driver}'
+						WHERE id_auto={id_auto}""")
+		self.conn.commit()
 
 	# удалить исполнителя
 	def delete_customer(self, id_customer):
@@ -122,9 +130,9 @@ class DB:
 		self.conn.commit()
 
 	# удалить авто
-	# def delete_auto(self, id_auto):
-	# 	self.c.execute(f"DELETE FROM auto WHERE id_auto = {id_auto}")
-	# 	self.conn.commit()
+	def delete_auto(self, id_auto):
+		self.c.execute(f"DELETE FROM auto WHERE id_auto = {id_auto}")
+		self.conn.commit()
 
 	# поиск исполнителя
 	def search_customer(self, name_search):
@@ -162,10 +170,28 @@ class DB:
 		#self.conn.commit()
 
 	# вывод авто
-	# def view_auto(self):
-	# 	self.c.execute(f"SELECT id_auto,brand_auto,num_tractor,num_trailer,fio_driver FROM auto")
-	# 	return self.c.fetchall()
-	# 	#self.conn.commit()
+	def view_auto(self):
+		self.c.execute(f"SELECT * FROM auto")
+		return self.c.fetchall()
+
+
+	#добавить адресс сохранения
+
+	def insert_save_address(self, address_save):
+		self.c.execute(f"""INSERT INTO save (address_save) VALUES '{address_save}' """)
+		self.conn.commit()
+
+	# изменить адресс сохранения
+	def update_save_address(self, address_save):
+		self.c.execute(f"""UPDATE save SET address_save='{address_save}'WHERE id_save= 1""")
+		self.conn.commit()
+
+	# вывести адрес сохранения
+	def view_save_address(self):
+		self.c.execute(f"SELECT * FROM save")
+		return self.c.fetchall()
+
+
 
 
 
