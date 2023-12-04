@@ -132,7 +132,7 @@
     <rect>
      <x>204</x>
      <y>12</y>
-     <width>471</width>
+     <width>431</width>
      <height>21</height>
     </rect>
    </property>
@@ -153,7 +153,7 @@
     <rect>
      <x>204</x>
      <y>43</y>
-     <width>471</width>
+     <width>431</width>
      <height>21</height>
     </rect>
    </property>
@@ -301,6 +301,45 @@
          </property>
          <property name="text">
           <string>Авто</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButton_7">
+         <property name="minimumSize">
+          <size>
+           <width>20</width>
+           <height>20</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>20</width>
+           <height>20</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Arial</family>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton {
+	border: none;
+}</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normaloff>../res/free-icon-excel-732220.png</normaloff>../res/free-icon-excel-732220.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>20</width>
+           <height>20</height>
+          </size>
          </property>
         </widget>
        </item>
@@ -695,7 +734,7 @@
         </property>
         <property name="icon">
          <iconset>
-          <normaloff>res/settings.png</normaloff>res/settings.png</iconset>
+          <normaloff>../res/settings.png</normaloff>../res/settings.png</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -821,7 +860,7 @@
         </property>
         <property name="icon">
          <iconset>
-          <normaloff>res/settings.png</normaloff>res/settings.png</iconset>
+          <normaloff>../res/settings.png</normaloff>../res/settings.png</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -853,10 +892,80 @@
     <string/>
    </property>
    <property name="pixmap">
-    <pixmap>res/logo.png</pixmap>
+    <pixmap>../res/logo.png</pixmap>
    </property>
    <property name="scaledContents">
     <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_6">
+   <property name="geometry">
+    <rect>
+     <x>650</x>
+     <y>17</y>
+     <width>40</width>
+     <height>40</height>
+    </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>40</width>
+     <height>40</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>40</width>
+     <height>40</height>
+    </size>
+   </property>
+   <property name="font">
+    <font>
+     <family>Arial</family>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{
+	background: rgba(255, 255, 255, 0);
+}</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normaloff>../res/free-icon-gear-10186135.png</normaloff>../res/free-icon-gear-10186135.png</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>40</width>
+     <height>40</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_8">
+   <property name="geometry">
+    <rect>
+     <x>390</x>
+     <y>470</y>
+     <width>91</width>
+     <height>32</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Arial</family>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+	background: #FFD53D;
+	border: 1px solid rgb(122, 122, 122);
+    border-radius: 5px;  /* Установите радиус закругления, например, 10px */
+}</string>
+   </property>
+   <property name="text">
+    <string>Очистить</string>
    </property>
   </widget>
  </widget>
