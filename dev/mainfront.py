@@ -1,4 +1,4 @@
-import sys, mainback, os,  pyperclip
+import sys, mainback, os, pyperclip
 from ui import customers # таблица с заказчиками
 from ui import executor_add # маленькие окна Исполнитель
 from ui import customers_add # маленькие окна Зазазчик
@@ -12,9 +12,6 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog, QMessageBox
 from datetime import date
-
-import pandas as pd
-from numpy import array
 
 
 class App(QMainWindow, engine.Ui_widget):
@@ -328,6 +325,7 @@ class App(QMainWindow, engine.Ui_widget):
 			self.name_address = address[0][1]
 		except:
 			self.db.insert_save_address(str_path)
+			self.name_address = str_path
 			
 
 
