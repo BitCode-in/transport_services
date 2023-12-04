@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'ui_template/engine.ui'
+# Form implementation generated from reading ui file 'ui_template\engine.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.9
 #
@@ -9,7 +9,6 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-import os
 
 
 class Ui_widget(object):
@@ -62,7 +61,7 @@ class Ui_widget(object):
         self.label_4.setFont(font)
         self.label_4.setObjectName("label_4")
         self.lineEdit = QtWidgets.QLineEdit(widget)
-        self.lineEdit.setGeometry(QtCore.QRect(204, 12, 471, 21))
+        self.lineEdit.setGeometry(QtCore.QRect(204, 12, 431, 21))
         font = QtGui.QFont()
         font.setFamily("Arial")
         self.lineEdit.setFont(font)
@@ -72,7 +71,7 @@ class Ui_widget(object):
 "}")
         self.lineEdit.setObjectName("lineEdit")
         self.lineEdit_2 = QtWidgets.QLineEdit(widget)
-        self.lineEdit_2.setGeometry(QtCore.QRect(204, 43, 471, 21))
+        self.lineEdit_2.setGeometry(QtCore.QRect(204, 43, 431, 21))
         font = QtGui.QFont()
         font.setFamily("Arial")
         self.lineEdit_2.setFont(font)
@@ -137,6 +136,22 @@ class Ui_widget(object):
         self.label_6.setFont(font)
         self.label_6.setObjectName("label_6")
         self.horizontalLayout_2.addWidget(self.label_6)
+        self.pushButton_7 = QtWidgets.QPushButton(self.scrollAreaWidgetContents_2)
+        self.pushButton_7.setMinimumSize(QtCore.QSize(20, 20))
+        self.pushButton_7.setMaximumSize(QtCore.QSize(20, 20))
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        self.pushButton_7.setFont(font)
+        self.pushButton_7.setStyleSheet("QPushButton {\n"
+"    border: none;\n"
+"}")
+        self.pushButton_7.setText("")
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap("ui_template\\../res/free-icon-excel-732220.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.pushButton_7.setIcon(icon)
+        self.pushButton_7.setIconSize(QtCore.QSize(20, 20))
+        self.pushButton_7.setObjectName("pushButton_7")
+        self.horizontalLayout_2.addWidget(self.pushButton_7)
         self.pushButton_2 = QtWidgets.QPushButton(self.scrollAreaWidgetContents_2)
         self.pushButton_2.setMinimumSize(QtCore.QSize(20, 20))
         self.pushButton_2.setMaximumSize(QtCore.QSize(20, 20))
@@ -275,9 +290,9 @@ class Ui_widget(object):
 "    background: rgba(255, 255, 255, 0);\n"
 "}")
         self.pushButton_4.setText("")
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap(f"{os.getcwd()}/res/settings.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.pushButton_4.setIcon(icon)
+        icon1 = QtGui.QIcon()
+        icon1.addPixmap(QtGui.QPixmap("ui_template\\../res/settings.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.pushButton_4.setIcon(icon1)
         self.pushButton_4.setIconSize(QtCore.QSize(20, 20))
         self.pushButton_4.setObjectName("pushButton_4")
         self.horizontalLayout.addWidget(self.pushButton_4)
@@ -314,7 +329,7 @@ class Ui_widget(object):
 "    background: rgba(255, 255, 255, 0);\n"
 "}")
         self.pushButton_5.setText("")
-        self.pushButton_5.setIcon(icon)
+        self.pushButton_5.setIcon(icon1)
         self.pushButton_5.setIconSize(QtCore.QSize(20, 20))
         self.pushButton_5.setObjectName("pushButton_5")
         self.horizontalLayout.addWidget(self.pushButton_5)
@@ -325,9 +340,36 @@ class Ui_widget(object):
         font.setFamily("Arial")
         self.label_9.setFont(font)
         self.label_9.setText("")
-        self.label_9.setPixmap(QtGui.QPixmap(f"{os.getcwd()}/res/logo.png"))
+        self.label_9.setPixmap(QtGui.QPixmap("ui_template\\../res/logo.png"))
         self.label_9.setScaledContents(True)
         self.label_9.setObjectName("label_9")
+        self.pushButton_6 = QtWidgets.QPushButton(widget)
+        self.pushButton_6.setGeometry(QtCore.QRect(650, 17, 40, 40))
+        self.pushButton_6.setMinimumSize(QtCore.QSize(40, 40))
+        self.pushButton_6.setMaximumSize(QtCore.QSize(40, 40))
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        self.pushButton_6.setFont(font)
+        self.pushButton_6.setStyleSheet("QPushButton{\n"
+"    background: rgba(255, 255, 255, 0);\n"
+"}")
+        self.pushButton_6.setText("")
+        icon2 = QtGui.QIcon()
+        icon2.addPixmap(QtGui.QPixmap("ui_template\\../res/free-icon-gear-10186135.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.pushButton_6.setIcon(icon2)
+        self.pushButton_6.setIconSize(QtCore.QSize(40, 40))
+        self.pushButton_6.setObjectName("pushButton_6")
+        self.pushButton_8 = QtWidgets.QPushButton(widget)
+        self.pushButton_8.setGeometry(QtCore.QRect(390, 470, 91, 32))
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        self.pushButton_8.setFont(font)
+        self.pushButton_8.setStyleSheet("QPushButton {\n"
+"    background: #FFD53D;\n"
+"    border: 1px solid rgb(122, 122, 122);\n"
+"    border-radius: 5px;  /* Установите радиус закругления, например, 10px */\n"
+"}")
+        self.pushButton_8.setObjectName("pushButton_8")
 
         self.retranslateUi(widget)
         QtCore.QMetaObject.connectSlotsByName(widget)
@@ -352,3 +394,4 @@ class Ui_widget(object):
         self.label_10.setText(_translate("widget", "Паспортные данные"))
         self.label_7.setText(_translate("widget", "Исполнитель:"))
         self.label_8.setText(_translate("widget", "Заказчик:"))
+        self.pushButton_8.setText(_translate("widget", "Очистить"))
