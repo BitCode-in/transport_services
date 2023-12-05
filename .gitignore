@@ -2,7 +2,7 @@
 build/
 dist/
 .idea/
-dev/__pychache__/
-dev/ui/__pychache__/
+dev/__pycache__/
+dev/ui/__pycache__/
 activate.bat
 dev/activate.bat
