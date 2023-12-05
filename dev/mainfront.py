@@ -31,6 +31,21 @@ class App(QMainWindow, engine.Ui_widget):
 		self.list_auto.append(temp_genauto)
 		self.verticalLayout_3.addWidget(temp_genauto)
 
+	def closeEvent(self, event):
+		msg_box = QMessageBox()
+		msg_box.setIcon(QMessageBox.Question)
+		msg_box.setWindowTitle("Подтверждение")
+		msg_box.setText("Вы уверены, что хотите закрыть программу?")
+		msg_box.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
+		msg_box.button(QMessageBox.Yes).setText('Да')
+		msg_box.button(QMessageBox.No).setText('Нет')
+		msg_box.setWindowIcon(QIcon('res/icon.png'))
+		reply = msg_box.exec()
+		if reply == QMessageBox.Yes:
+			event.accept()
+		else:
+			event.ignore()
+
 	def setting_init(self):
 		self.setWindowIcon(QtGui.QIcon('res/icon.png'))
 		self.pushButton.clicked.connect(self.word_create)
@@ -74,12 +89,34 @@ class App(QMainWindow, engine.Ui_widget):
 		self.executorui.pushButton_4.clicked.connect(self.search_executor)
 
 	def del_executor(self):
+		msg_box = QMessageBox()
+		msg_box.setIcon(QMessageBox.Question)
+		msg_box.setWindowTitle("Подтверждение удаления")
+		msg_box.setText("Вы уверены, что хотите удалить исполнителя?")
+		msg_box.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
+		msg_box.button(QMessageBox.Yes).setText('Да')
+		msg_box.button(QMessageBox.No).setText('Нет')
+		msg_box.setWindowIcon(QIcon('res/icon.png'))
+		reply = msg_box.exec()
+		if reply == QMessageBox.No:
+			return
 		num = self.executorui.tableWidget.currentRow()
 		id = self.list_executor[num][0]
 		self.db.delete_executor(int(id))
 		self.update_table_executor()
 
 	def del_customer(self):
+		msg_box = QMessageBox()
+		msg_box.setIcon(QMessageBox.Question)
+		msg_box.setWindowTitle("Подтверждение удаления")
+		msg_box.setText("Вы уверены, что хотите удалить заказчика?")
+		msg_box.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
+		msg_box.button(QMessageBox.Yes).setText('Да')
+		msg_box.button(QMessageBox.No).setText('Нет')
+		msg_box.setWindowIcon(QIcon('res/icon.png'))
+		reply = msg_box.exec()
+		if reply == QMessageBox.No:
+			return
 		num = self.customersui.tableWidget.currentRow()
 		id = self.list_customers[num][0]
 		self.db.delete_customer(int(id))
@@ -247,7 +284,7 @@ class App(QMainWindow, engine.Ui_widget):
 		self.customers_addui.pushButton.clicked.connect(
 			lambda: (self.db.update_customer(id,
 																						self.customers_addui.lineEdit.text(),
-											 											self.customers_addui.lineEdit_8.text(),
+																						self.customers_addui.lineEdit_8.text(),
 																						self.customers_addui.lineEdit_2.text(),
 																						self.customers_addui.lineEdit_3.text(),
 																						self.customers_addui.lineEdit_4.text(),
@@ -344,9 +381,20 @@ class App(QMainWindow, engine.Ui_widget):
 		try:
 			clipboard_data = pyperclip.paste()
 			df = []
-			clipboard_data = clipboard_data.replace("\r", "").split('\n')[:-1]
+			if clipboard_data[-1] == '\n':
+				clipboard_data = clipboard_data[:-1]
+			clipboard_data = clipboard_data.replace("\r", "").split('\n')
 			for i in clipboard_data:
 				df.append(i.split('\t'))
+			temp_rm_widget = []
+			for c, i in enumerate(self.list_auto):
+				if i.lineEdit_1.text() == "" and i.lineEdit_2.text() == "" and i.lineEdit_3.text() == "" and i.lineEdit_4.text() == "":
+					temp_rm_widget.append(c)
+					self.verticalLayout_3.removeWidget(i)
+
+			for c, i in enumerate(temp_rm_widget):
+				self.list_auto.pop(i-c)
+
 			for i in df:
 				print(i)
 				temp_genauto = GenAuto(settext=str(len(self.list_auto) + 1))
@@ -354,9 +402,6 @@ class App(QMainWindow, engine.Ui_widget):
 				temp_genauto.lineEdit_2.setText(i[1])
 				temp_genauto.lineEdit_3.setText(i[2])
 				temp_genauto.lineEdit_4.setText(i[3])
-				if self.list_auto[0].lineEdit_1.text() == "" and self.list_auto[0].lineEdit_2.text() == "" and self.list_auto[0].lineEdit_3.text() == "" and self.list_auto[0].lineEdit_4.text() == "":
-					self.verticalLayout_3.removeWidget(self.list_auto[-1])
-					self.list_auto.pop(-1)
 				self.list_auto.append(temp_genauto)
 				self.verticalLayout_3.addWidget(temp_genauto)
 		except:
@@ -434,7 +479,17 @@ class App(QMainWindow, engine.Ui_widget):
 			msBox.exec()
 
 	def clear_text(self):
-
+		msg_box = QMessageBox()
+		msg_box.setIcon(QMessageBox.Question)
+		msg_box.setWindowTitle("Подтверждение удаления")
+		msg_box.setText("Вы уверены, что хотите очистить поля?")
+		msg_box.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
+		msg_box.button(QMessageBox.Yes).setText('Да')
+		msg_box.button(QMessageBox.No).setText('Нет')
+		msg_box.setWindowIcon(QIcon('res/icon.png'))
+		reply = msg_box.exec()
+		if reply == QMessageBox.No:
+			return
 		self.lineEdit.clear()
 		self.lineEdit_2.clear()
 		self.lineEdit_3.clear()
